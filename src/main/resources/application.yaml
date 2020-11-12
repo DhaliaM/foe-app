@@ -1,0 +1,144 @@
+buildings:
+  #eventgebaeude
+  HippodromCarceres:
+     name: Hippodrom-Carceres
+     forgepoints: 10
+     goods: 18
+     coins: 40470
+     medals: 36
+     galaxie: false
+  HippodromSphendone:
+     name: Hippodrom-Sphendone
+     forgepoints : 12
+     goods: 18
+     coins: 55860
+     production: 2390 
+  Leuchtturm:
+     name: Großer Leuchtturm
+     forgepoints : 8
+     coins: 30210
+     loot:
+       -
+         id: 1
+         chance: 0.05
+         amount: 25
+       -
+         id: 2
+         chance: 0.4
+         amount: 12  
+       -
+         id: 3
+         chance: 0.4
+         amount: 50
+       -  
+         id: 4
+         chance: 0.15
+         amount: 1900          
+  Villa:
+     name: Villa des Gouverneurs
+     forgepoints: 8
+     goods: 35
+     units: 4
+  Luftschiff:
+     name: Luftschiff
+     forgepoints: 9
+     goods: 20
+     coins: 62130
+     production: 3370
+  Weltausstellung:
+     name: Weltausstellung
+     forgepoints: 10
+     goods: 10
+     coins: 60990
+  Horrorhaus:
+     name: Haus des Wolfs
+     forgepoints: 4
+     goods: 5
+     coins: 38190
+     production: 1990
+  Badehaus:
+     name: Badehaus
+     forgepoints: 8
+     units: 6
+  Ehrenstatue-lvl-5:
+     name: Ehrenstatue - St. 5
+     forgepoints: 6
+     coins: 15960
+     honorstreets: 1
+  Ehrenstatue-lvl-3:
+     name: Ehrenstatue - St. 3
+     forgepoints: 6
+     coins: 15960
+     honorstreets: 2
+  Torbogen:
+     name: Finsterer Torbogen
+     forgepoints: 3
+     coins: 19950
+  SdW:
+     name: Schrein des Wissens
+     forgepoints: 1
+     coins: 7980
+     count: 6
+  SdW-lvl-2:
+     name: Schrein des Wissens - St. 2
+     forgepoints: 2
+     coins: 11514
+     count: 2
+  Monument-lvl-7:
+     name: Monument der Helden - St. 7
+     forgepoints: 3
+     goods: 6
+     medals: 8
+     coins: 23940
+     production: 4200
+  Muehle:
+     name: Farbenfrohe Herbstmuehle
+     forgepoints: 3
+     goods: 5
+     medals: 16
+     coins: 26790
+     production: 1060
+  Yggdrasil:
+     name: Yggdrasil - St. 3
+     forgepoints: 2
+     goods: 10
+     medals: 14
+     coins: 18240
+     production: 3200
+  Terrassenfeld-lvl-2:
+     name: Terrassenfeld - St. 2
+     forgepoints: 12
+     count: 1
+  Apfelmuehle:
+     name: Opulente Apfelmuehle
+     forgepoints: 7
+  uObelisk:
+     name: Uralter Obelisk
+     forgepoints: 2
+     goods: 4
+     coins: 5700
+     count: 2
+  Marmortor:
+     name: Koenigliches Marmortor
+     coins: 6669
+  Beet:
+     name: Sonnenblumenbeet
+     forgepoints: 3
+     coins: 4560
+     production: 3333
+  Begonienenbank:
+     name: Begonienbank
+     forgepoints: 5
+     medals: 166
+     
+bonus:
+  1:
+    name: Diamanten
+  2: 
+    name: Forge-Punkte
+  3:
+    name: Güter
+  4:
+    name: Medaillen
+  5: 
+    name: Agent 
