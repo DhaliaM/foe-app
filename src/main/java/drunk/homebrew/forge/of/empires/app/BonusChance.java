@@ -12,12 +12,12 @@ public class BonusChance {
 		Random rng = new Random();
 		Integer zufallszahl = rng.nextInt(101);
 		if(zufallszahl < d*100) {
-			LOGGER.error("Die Zufallszahl ist: " + zufallszahl);
+			//LOGGER.error("Die Zufallszahl ist: " + zufallszahl);
 			return true;
 		}
 		else
 		{
-		LOGGER.error("Die Zufallszahl ist: " + zufallszahl);
+		//LOGGER.error("Die Zufallszahl ist: " + zufallszahl);
 		return false;
 		}
 	}

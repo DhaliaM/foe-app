@@ -2,7 +2,13 @@ package drunk.homebrew.forge.of.empires.app;
 
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Einsammeln {
+	private static final Logger LOGGER = LoggerFactory.getLogger(Einsammeln.class);
+	
+	
 	BonusChance bonus = new BonusChance();
 	
 	
@@ -20,9 +26,21 @@ public class Einsammeln {
 		Buildings targetBuilding = productionBuildings.get(building);
 		Buildings result = new Buildings();
 		int faktor = 1;
+		
+		
+		if(productionBuildings.get(building).equals(productionBuildings.get("Leuchtturm"))){
+			
+			
+			
+			
+			LOGGER.error("L-Turm ist vorhanden" );
+		}
+		
+		
+		
 		if(productionBuildings.get(building).isGalaxie()) {
 			
-			if(bonus.galaxieChance(0.3)) {
+			if(bonus.galaxieChance(0.0)) {
 				faktor = 2;
 			}
 		}
