@@ -47,6 +47,9 @@ public class FoE {
 		try {
 		Long id = yamlData.getBuildings().get("Leuchtturm").getLoot().get(0).getId();
 		Bonus test =	yamlData.getBonus().get(id);
+		LOGGER.error("Id der Liste Loot " + id);
+		LOGGER.error("test " + test.getName());
+		
 		
 		
 		for(String key: yamlData.getBuildings().keySet()) {

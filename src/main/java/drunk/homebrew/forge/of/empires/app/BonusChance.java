@@ -6,9 +6,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class BonusChance {
-	private static final Logger LOGGER = LoggerFactory.getLogger(BonusChance.class);
+	//private static final Logger LOGGER = LoggerFactory.getLogger(BonusChance.class);
 	
-	public boolean galaxieChance(double d) {
+	public boolean chance(double d) {
 		Random rng = new Random();
 		Integer zufallszahl = rng.nextInt(101);
 		if(zufallszahl < d*100) {

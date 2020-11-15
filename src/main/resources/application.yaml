@@ -19,6 +19,7 @@ buildings:
      forgepoints : 8
      coins: 30210
      galaxie: true
+     diamonds: 0
      loot:
        -
          id: 1
@@ -134,6 +135,7 @@ buildings:
      name: "Begonienbank"
      forgepoints: 5
      medals: 166
+     
      
 bonus:
   1:

@@ -13,6 +13,7 @@ public class Buildings {
 	private int production;
 	private int coins;
 	private boolean galaxie;
+	private int diamonds;
 	
 	private List<Loot> loot;
 	
@@ -74,7 +75,7 @@ public class Buildings {
 	}
 	@Override
 	public String toString() {
-		return "Buildings [name=" + name + ", forgepoints=" + forgepoints + ", goods=" + goods + ", units=" + units
+		return "Buildings [name=" + name + ",diamonds=" + diamonds + ", forgepoints=" + forgepoints + ", goods=" + goods + ", units=" + units
 				+ ", medals=" + medals + ", honorstreets=" + honorstreets + ", count=" + count + ", production="
 				+ production + ", coins=" + coins + "]";
 	}
@@ -89,6 +90,12 @@ public class Buildings {
 	}
 	public void setGalaxie(boolean galaxie) {
 		this.galaxie = galaxie;
+	}
+	public int getDiamonds() {
+		return diamonds;
+	}
+	public void setDiamonds(int diamonds) {
+		this.diamonds = diamonds;
 	}
 	
 	
