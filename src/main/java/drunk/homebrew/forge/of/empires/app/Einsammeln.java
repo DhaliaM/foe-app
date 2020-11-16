@@ -26,9 +26,9 @@ public class Einsammeln {
 	Buildings einsammeln(LoadProperties yamlData, String building) {
 		Map<String, Buildings> productionBuildings = yamlData.getBuildings();
 		Buildings targetBuilding = productionBuildings.get(building);
-		List<Loot> bonusListe = targetBuilding.getLoot();
+		//List<Loot> bonusListe = targetBuilding.getLoot();
 		Buildings result = new Buildings();
-		Buildings lTurm = new BonusPool();
+		//Buildings lTurm = new BonusPool();
 		int faktor = 1;
 		
 		
@@ -39,36 +39,10 @@ public class Einsammeln {
 			Random rng = new Random();
 			Integer zufallszahl = rng.nextInt(101);
 			
-			result = result).poolLeuchtturm(productionBuildings.get("Leuchtturm", zufallszahl);
+			result = new BonusPool().poolLeuchtturm(productionBuildings.get("Leuchtturm"), zufallszahl);
 			
 			
-			LOGGER.error("L-Turm ist vorhanden " + lTurm.getForgepoints());
-			
-			
-			
-//			if(bonusListe.get(0).getChance() * 100 > zufallszahl) {
-//				targetBuilding.setDiamonds(bonusListe.get(0).getAmount());
-//				LOGGER.error("L-Turm ist vorhanden und es gab dias" + targetBuilding);
-//			}
-//			if(bonusListe.get(1).getChance() * 100 > zufallszahl) {
-//				if(bonus.chance(0.5)) {
-//					targetBuilding.setForgepoints(bonusListe.get(1).getAmount());
-//					LOGGER.error("L-Turm ist vorhanden und es gab fp" + targetBuilding);
-//				}
-//				else
-//				{
-//					targetBuilding.setGoods(bonusListe.get(2).getAmount());
-//					LOGGER.error("L-Turm ist vorhanden und es gab güter" + targetBuilding);
-//				}
-//			}
-			
-			
-			
-			
-			
-			
-			
-			
+			//LOGGER.error("L-Turm ist vorhanden " + result);	
 			
 		}
 		
@@ -76,7 +50,7 @@ public class Einsammeln {
 		
 		if(productionBuildings.get(building).isGalaxie()) {
 			
-			if(bonus.chance(0.0)) {
+			if(bonus.chance(0.3)) {
 				faktor = 2;
 			}
 		}

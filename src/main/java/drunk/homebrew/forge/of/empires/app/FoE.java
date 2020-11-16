@@ -24,7 +24,7 @@ public class FoE {
 		BonusChance chance = new BonusChance();
 		Einsammeln sammlung = new Einsammeln();
 		
-		Buildings blubb = new Buildings();
+		Buildings dailyIncome = new Buildings();
 		
 		int dailyForgepoints = 0;
 		int dailyGoods = 0;
@@ -32,6 +32,7 @@ public class FoE {
 		int dailyMedals = 0;
 		int dailyProduction = 0;
 		int dailyCoins = 0;
+		int dailyDiamonds = 0;
 		
 		//chance.galaxieChance((float) 0.4);
 		
@@ -47,29 +48,41 @@ public class FoE {
 		try {
 		Long id = yamlData.getBuildings().get("Leuchtturm").getLoot().get(0).getId();
 		Bonus test =	yamlData.getBonus().get(id);
-		LOGGER.error("Id der Liste Loot " + id);
-		LOGGER.error("test " + test.getName());
+		
 		
 		
 		
 		for(String key: yamlData.getBuildings().keySet()) {
-			dailyForgepoints = dailyForgepoints + sammlung.einsammeln(yamlData, key).getForgepoints();
-		    dailyGoods = dailyGoods + sammlung.einsammeln(yamlData, key).getGoods();
-		    dailyUnits = dailyUnits + sammlung.einsammeln(yamlData, key).getUnits();
-		    dailyMedals = dailyMedals + sammlung.einsammeln(yamlData, key).getMedals();
-		    dailyProduction = dailyProduction + sammlung.einsammeln(yamlData, key).getProduction();
-		    dailyCoins = dailyCoins + sammlung.einsammeln(yamlData, key).getCoins();
+			
+			
+			dailyIncome = sammlung.einsammeln(yamlData, key);
+			
+			dailyGoods = dailyGoods + dailyIncome.getGoods();
+			dailyForgepoints = dailyForgepoints + dailyIncome.getForgepoints();
+			dailyUnits = dailyUnits + dailyIncome.getUnits();
+			dailyMedals = dailyMedals + dailyIncome.getMedals();
+			dailyProduction = dailyProduction + dailyIncome.getProduction();
+			dailyCoins = dailyCoins + dailyIncome.getCoins();
+			dailyDiamonds = dailyDiamonds + dailyIncome.getDiamonds();
+			
+			
+//		    dailyGoods = dailyGoods + sammlung.einsammeln(yamlData, key).getGoods();
+//		    dailyUnits = dailyUnits + sammlung.einsammeln(yamlData, key).getUnits();
+//		    dailyMedals = dailyMedals + sammlung.einsammeln(yamlData, key).getMedals();
+//		    dailyProduction = dailyProduction + sammlung.einsammeln(yamlData, key).getProduction();
+//		    dailyCoins = dailyCoins + sammlung.einsammeln(yamlData, key).getCoins();
 		}
 		//LOGGER.error("Inhalt der Map buildings" + test.getName());
 		//LOGGER.error("Galaxiechance " + chance.galaxieChance(0.4));
 		//LOGGER.error("Rss einsammeln vom " + yamlData.getBuildings());
 		//LOGGER.error("Rss einsammeln vom " + yamlData.getBuildings().keySet());
-		LOGGER.error("tägliche FP = " + dailyForgepoints);
-		LOGGER.error("tägliche Güter = " + dailyGoods);
-		LOGGER.error("tägliche Einheiten = " + dailyUnits);
-		LOGGER.error("tägliche Medaillen = " + dailyMedals);
-		LOGGER.error("täglicher Vorrat = " + dailyProduction);
-		LOGGER.error("tägliche Münzen = " + dailyCoins);
+		LOGGER.error("taegliche FP = " + dailyForgepoints);
+		LOGGER.error("taegliche Gueter = " + dailyGoods);
+		LOGGER.error("taegliche Einheiten = " + dailyUnits);
+		LOGGER.error("taegliche Medaillen = " + dailyMedals);
+		LOGGER.error("taeglicher Vorrat = " + dailyProduction);
+		LOGGER.error("taegliche Muenzen = " + dailyCoins);
+		LOGGER.error("taegliche Diamanten = " + dailyDiamonds);
 		
 		}
 		catch (IndexOutOfBoundsException e) {
