@@ -1,5 +1,6 @@
 package drunk.homebrew.forge.of.empires.app;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Buildings {
@@ -16,6 +17,28 @@ public class Buildings {
 	private int diamonds;
 	
 	private List<Loot> loot;
+	
+	public Buildings() {
+		// Für SnakeYaml
+	}
+	
+	/**
+	 * Ein Copy-Konstruktor. Hier wird eine Kopie des jeweiligen Gebäudes erstellt und das übergeben Gebäunde nicht verändert.
+	 */
+	public Buildings(Buildings buildings) {
+		this.coins = buildings.coins;
+		this.count = buildings.count;
+		this.diamonds = buildings.diamonds;
+		this.forgepoints = buildings.forgepoints;
+		this.galaxie = buildings.galaxie;
+		this.goods = buildings.goods;
+		this.honorstreets = buildings.honorstreets;
+		this.loot = new ArrayList<>(buildings.loot); // Hier wird nur eine neue Liste erstellt, wenn du ein Loot-Objekt änderst, hat das Auswirkung auf die Kopie und das übergeben Objekt.
+		this.medals = buildings.medals;
+		this.name = buildings.name;
+		this.production = buildings.production;
+		this.units = buildings.units;
+	}
 	
 	
 	

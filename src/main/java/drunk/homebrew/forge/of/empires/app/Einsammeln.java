@@ -28,21 +28,16 @@ public class Einsammeln {
 		Buildings targetBuilding = productionBuildings.get(building);
 		List<Loot> bonusListe = targetBuilding.getLoot();
 		Buildings result = new Buildings();
-		Buildings lTurm = new BonusPool();
 		int faktor = 1;
 		
-		
-		
-		
-		
-		if(productionBuildings.get(building).equals(productionBuildings.get("Leuchtturm"))){
+		if("Leuchtturm".equals(targetBuilding.getName())){
 			Random rng = new Random();
 			Integer zufallszahl = rng.nextInt(101);
 			
-			result = result).poolLeuchtturm(productionBuildings.get("Leuchtturm", zufallszahl);
+			result = new BonusPool().poolLeuchtturm(targetBuilding, zufallszahl);
 			
 			
-			LOGGER.error("L-Turm ist vorhanden " + lTurm.getForgepoints());
+			LOGGER.error("L-Turm ist vorhanden " + result.getForgepoints());
 			
 			
 			
@@ -58,7 +53,7 @@ public class Einsammeln {
 //				else
 //				{
 //					targetBuilding.setGoods(bonusListe.get(2).getAmount());
-//					LOGGER.error("L-Turm ist vorhanden und es gab güter" + targetBuilding);
+//					LOGGER.error("L-Turm ist vorhanden und es gab gï¿½ter" + targetBuilding);
 //				}
 //			}
 			
