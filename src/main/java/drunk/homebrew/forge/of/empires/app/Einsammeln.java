@@ -35,11 +35,11 @@ public class Einsammeln {
 		
 		
 		
-		if(productionBuildings.get(building).equals(productionBuildings.get("Leuchtturm"))){
+		if(productionBuildings.get(building).equals(productionBuildings.get("3"))){
 			Random rng = new Random();
 			Integer zufallszahl = rng.nextInt(101);
 			
-			result = new BonusPool().poolLeuchtturm(productionBuildings.get("Leuchtturm"), zufallszahl);
+			result = new BonusPool().poolLeuchtturm(productionBuildings.get("3"), zufallszahl);
 			
 			
 			//LOGGER.error("L-Turm ist vorhanden " + result);	

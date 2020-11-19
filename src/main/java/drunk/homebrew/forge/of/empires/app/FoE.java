@@ -34,7 +34,7 @@ public class FoE {
 		int dailyCoins = 0;
 		int dailyDiamonds = 0;
 		
-		//chance.galaxieChance((float) 0.4);
+		
 		
 		Yaml yaml = new Yaml(new Constructor(LoadProperties.class));
 		InputStream stream = FoE.class.getClassLoader().getResourceAsStream("application.yaml");
@@ -43,27 +43,61 @@ public class FoE {
 		
 		
 		
-		//dailyForgepoints = sammlung.einsammeln(yamlData, yamlData.getBuildings().keySet().);
+		//LOGGER.error("Inhalt der Parameter " + args.length);
 		
-		try {
-		Long id = yamlData.getBuildings().get("Leuchtturm").getLoot().get(0).getId();
-		Bonus test =	yamlData.getBonus().get(id);
+
+		  
 		
-		
-		
-		
-		for(String key: yamlData.getBuildings().keySet()) {
-			
-			
-			dailyIncome = sammlung.einsammeln(yamlData, key);
-			
+		for(String str: args) {
+		      // convert into integer type
+		    int argument = Integer.parseInt(str);
+		    String s = Integer.toString(argument);
+		  //LOGGER.error("Argument in integer form: " + s);
+		  
+		    dailyIncome = sammlung.einsammeln(yamlData, s); 
+			  
 			dailyGoods = dailyGoods + dailyIncome.getGoods();
+			
 			dailyForgepoints = dailyForgepoints + dailyIncome.getForgepoints();
 			dailyUnits = dailyUnits + dailyIncome.getUnits();
 			dailyMedals = dailyMedals + dailyIncome.getMedals();
 			dailyProduction = dailyProduction + dailyIncome.getProduction();
 			dailyCoins = dailyCoins + dailyIncome.getCoins();
 			dailyDiamonds = dailyDiamonds + dailyIncome.getDiamonds();
+		    
+		
+		
+		
+		}
+		
+		
+		
+			  
+			  
+			  
+			  
+			  
+	        
+		
+		
+		try {
+
+		
+		
+		
+		
+//		for(String key: yamlData.getBuildings().keySet()) {
+//			
+//			
+//			dailyIncome = sammlung.einsammeln(yamlData, key);
+//			
+//			dailyGoods = dailyGoods + dailyIncome.getGoods();
+//			dailyForgepoints = dailyForgepoints + dailyIncome.getForgepoints();
+//			dailyUnits = dailyUnits + dailyIncome.getUnits();
+//			dailyMedals = dailyMedals + dailyIncome.getMedals();
+//			dailyProduction = dailyProduction + dailyIncome.getProduction();
+//			dailyCoins = dailyCoins + dailyIncome.getCoins();
+//			dailyDiamonds = dailyDiamonds + dailyIncome.getDiamonds();
 			
 			
 //		    dailyGoods = dailyGoods + sammlung.einsammeln(yamlData, key).getGoods();
@@ -71,7 +105,7 @@ public class FoE {
 //		    dailyMedals = dailyMedals + sammlung.einsammeln(yamlData, key).getMedals();
 //		    dailyProduction = dailyProduction + sammlung.einsammeln(yamlData, key).getProduction();
 //		    dailyCoins = dailyCoins + sammlung.einsammeln(yamlData, key).getCoins();
-		}
+//		}
 		//LOGGER.error("Inhalt der Map buildings" + test.getName());
 		//LOGGER.error("Galaxiechance " + chance.galaxieChance(0.4));
 		//LOGGER.error("Rss einsammeln vom " + yamlData.getBuildings());
