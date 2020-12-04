@@ -49,7 +49,7 @@ public class Einsammeln {
 		
 		
 		if(productionBuildings.get(building).isGalaxie()) {
-			
+			//Galaxiechance
 			if(bonus.chance(0.3)) {
 				faktor = 2;
 			}
