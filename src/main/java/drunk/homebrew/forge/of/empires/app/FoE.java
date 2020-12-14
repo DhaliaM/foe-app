@@ -39,12 +39,14 @@ public class FoE {
 		Yaml yaml = new Yaml(new Constructor(LoadProperties.class));
 		InputStream stream = FoE.class.getClassLoader().getResourceAsStream("application.yaml");
 		LoadProperties yamlData = yaml.load(stream);
+//
+//		MapToJson mtj = new MapToJson();
+//		String jsonString = mtj.mapToJson(yamlData);
 
+		TransmitBuildings transmitBuildings = new TransmitBuildings();
+		String buildings = transmitBuildings.transmitBuildings();
 
-		MapToJson mtj = new MapToJson();
-		String jsonString = mtj.mapToJson(yamlData);
-
-		LOGGER.error("Inhalt des Json Objects " + jsonString);
+		LOGGER.error("Inhalt des Json Objects " + buildings);
 
 
 		for (String str : args) {
