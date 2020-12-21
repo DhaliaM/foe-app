@@ -39,9 +39,7 @@ public class FoE {
 		Yaml yaml = new Yaml(new Constructor(LoadProperties.class));
 		InputStream stream = FoE.class.getClassLoader().getResourceAsStream("application.yaml");
 		LoadProperties yamlData = yaml.load(stream);
-//
-//		MapToJson mtj = new MapToJson();
-//		String jsonString = mtj.mapToJson(yamlData);
+
 
 		TransmitBuildings transmitBuildings = new TransmitBuildings();
 		String buildings = transmitBuildings.transmitBuildings();
@@ -54,9 +52,7 @@ public class FoE {
 			int argument = Integer.parseInt(str);
 			String s = Integer.toString(argument);
 
-//			if(s == "1"){
-//				//do somthing
-//			}
+
 
 			//LOGGER.error("Argument in integer form: " + s);
 

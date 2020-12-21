@@ -1,5 +1,8 @@
 package drunk.homebrew.forge.of.empires.app;
 
+import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
@@ -10,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.Map;
 
 public class BuildingServlet extends HttpServlet {
@@ -54,12 +58,26 @@ public class BuildingServlet extends HttpServlet {
             sb.append("</label>");
             sb.append("</li>");
         }
-        sb.append("<input type=\"submit\" value=\"Submit\">");
+        sb.append("<input type=\"Button\" id=\"submitButton\" onclick=\"submitJson()\" value=\"Submit\">");
         sb.append("</form>");
         sb.append("<script>");
-        sb.append("var dataForm = document.getElementById(\"Buildings\")");
-        sb.append(("var dataJson = JSON.stringify(dataFrom)"));
-
+        sb.append("const form = document.querySelector('form');");
+        sb.append("form.addEventListener('submit', event => {event.preventDefault()});");
+        sb.append("function submitJson(){");
+        sb.append("var dataForm = document.getElementById(\"buildings\");");
+        sb.append("var dataInArray = new Map();");
+        sb.append("for(let element of dataForm.elements){");
+        sb.append("dataInArray[element.id] = element.value;");
+        sb.append("}");
+        sb.append("delete dataInArray[\"submitButton\"];"); //entfernt den Submit Button aus der Map dataInArray
+        //sb.append("console.log(Object.values(dataInArray));");
+        sb.append("var dataJson = JSON.stringify(dataInArray);");
+        sb.append("var xhr = new XMLHttpRequest();");
+        sb.append("xhr.open(\"POST\", \"/FoE/EventBuildings\", true);");
+        sb.append("xhr.setRequestHeader('Content-Type', 'application/json');");
+        sb.append("xhr.send(dataJson);");
+        //sb.append("alert (dataJson);"); //nur zum testen was in dataJson drin steht
+        sb.append("}");
         sb.append("</script>");
         sb.append("</body>");
         sb.append("</html>");
@@ -71,9 +89,30 @@ public class BuildingServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+//        Map<String,Object> result = new ObjectMapper().readValue(request, Map.class);
+
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
 
+        PrintWriter pw = response.getWriter();
+        StringBuilder sb = new StringBuilder();
 
+        sb.append("<!DOCTYPE html>");
+        sb.append("<html lang=\"de\">");
+        sb.append("<head>");
+        sb.append("<title>Titel der Seite | Name der Website</title>");
+        sb.append("</head>");
+        sb.append("<body>");
+        sb.append("<p>");
+        sb.append(request);
+        sb.append("</p>");
+        sb.append("</body>");
+        sb.append("<script>");
+        //sb.append("alert ('test')");
+        sb.append("</script>");
+        sb.append("</html>");
+
+        pw.println(sb);
+        pw.close();
     }
 }
