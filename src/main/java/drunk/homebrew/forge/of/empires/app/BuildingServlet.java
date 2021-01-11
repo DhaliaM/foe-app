@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BuildingServlet extends HttpServlet {
-    private String foeAusgabe = new String("Ausgabe");
+
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
@@ -54,22 +54,21 @@ public class BuildingServlet extends HttpServlet {
         sb.append("<body>");
         sb.append("<div class=\"wrapper\">");
         sb.append("<div class=\"input\">");
-        sb.append("<form action=\"EventBuildings\" name=\"buildings\" id=\"buildings\"");
+        sb.append("<form action=\"EventBuildings\" name=\"buildings\" id=\"buildings\">");
         sb.append("<ul>");
-        for (String key : eventBuildings.keySet()){                                                     //daten aus der map, atm yaml
+        for (String key : eventBuildings.keySet()){                                                                     //daten aus der map, atm yaml
             sb.append("<li>");
             sb.append("<label>");
-            sb.append(eventBuildings.get(key).getName());                                               //Label Name aus der map
-            sb.append(" <input type=\"number\" id=\"");                                                 //input Feld, Id basierned auf der Map
+            sb.append(eventBuildings.get(key).getName());                                                               //Label Name aus der map
+            sb.append(" <input type=\"number\" id=\"");                                                                 //input Feld, Id basierned auf der Map
             sb.append(key);
             sb.append("\" name=\"");
-            sb.append(eventBuildings.get(key).getName());                                               //input Feld Name aus der map, vmtl nutzlos
+            sb.append(eventBuildings.get(key).getName());
             sb.append("\" value=\"0\" size=\"1\">");
             sb.append(" Anzahl Galaxiebonus ");
-            sb.append("<input type =\"number\" id=\"");
+            sb.append("<input type =\"number\" id=\"Galaxiebonus.");
             sb.append(key);
-            sb.append(".GalaxieBonus\" ");
-            sb.append("value=\"0\" size=\"1\">");
+            sb.append("\" value=\"0\" size=\"1\">");
             sb.append("</label>");
 
             sb.append("</li>");
@@ -78,9 +77,9 @@ public class BuildingServlet extends HttpServlet {
         sb.append("</form>");
         sb.append("</div>");
 
-        sb.append("<div class=\"output\">");
+        sb.append("<div id=\"output\" class=\"output\">");
 
-        sb.append(foeAusgabe);
+        sb.append("Ausgabe");
 
 
         sb.append("</div>");
@@ -91,27 +90,42 @@ public class BuildingServlet extends HttpServlet {
         sb.append("const form = document.querySelector('form');");
         sb.append("form.addEventListener('submit', event => {event.preventDefault()});");
 
-        //Funktion um die Id aus dem Button ohne Buchstaben zu erhalten, war ursprünglich für etwas anderes
-//        sb.append("function splitButtonString(String string){");
-//        sb.append("string = string.split(\".\",1)");
-//        sb.append("return string;");
-//        sb.append("}");
+        //Funktion um die Json mit nested Map zu füllen
+        sb.append("function mapToObjectRec(m) {");
+        sb.append("let lo = {};");
+        sb.append("for(let[k,v] of m){");
+        sb.append("if(v instanceof Map){");
+        sb.append("lo[k] = mapToObjectRec(v);");
+        sb.append("}");
+        sb.append("else {");
+        sb.append("lo[k] = v;");
+        sb.append("}");
+        sb.append("}");
+        sb.append("return lo;");
+        sb.append("}");
 
         //Funktion um die Json zu füllen
         sb.append("function submitJson(){");
         sb.append("var dataForm = document.getElementById(\"buildings\");");
         sb.append("var dataInArray = new Map();");
-        sb.append("for(let element of dataForm.elements){");                    //ist 1=0  und nachdem alle Gebäude durch sind 1.GalaxieBonus=1
-        sb.append("dataInArray[element.id] = element.value;");                  //soll 1:
-        sb.append("}");                                                         //      Anzahl=2
-                                                                                //      GBonus=1
-        sb.append("delete dataInArray[\"submitButton\"];"); //entfernt den Submit Button aus der Map dataInArray
-        sb.append("console.log(Object.values(dataInArray));");
-        sb.append("var dataJson = JSON.stringify(dataInArray);");
+        sb.append("for(let element of dataForm.elements){");
+        sb.append("let shortId = element.id;");
+        sb.append("shortId = shortId.split(\".\",1);");
+        sb.append("if(shortId != \"Galaxiebonus\" && shortId != \"submitButton\"){");                                   //hier hängts nicht mehr
+        sb.append("let inputData = new Map();");
+        sb.append("inputData.set('Anzahl', element.value);");
+        sb.append("inputData.set('Galaxiebonus', document.getElementById(\"Galaxiebonus.\" + element.id).value);");
+        sb.append("dataInArray.set(element.id, inputData);");
+        sb.append("}");                                                                                                 // schließt if statement
+        sb.append("}");                                                                                                 // schließt for
+        sb.append("console.log(dataInArray);");
+        sb.append("var dataJson = mapToObjectRec(dataInArray);");
+        sb.append("var dataJson = JSON.stringify(dataJson);");
         sb.append("var xhr = new XMLHttpRequest();");
         sb.append("xhr.onreadystatechange = function() {");
         sb.append("if (this.readyState == 4 && this.status == 200) {");
-        sb.append("console.log(this.responseText);"); //enthält response von doPost, <div>output mit response füllen somehow
+        sb.append("console.log(this.responseText);");                                                                   //enthält response von doPost
+        sb.append("document.getElementById(\"output\").innerHTML = this.responseText;");
         sb.append("}");
         sb.append("};");
         sb.append("xhr.open(\"POST\", \"/FoE/EventBuildings\", true);");
@@ -137,17 +151,17 @@ public class BuildingServlet extends HttpServlet {
         Map<String,Object> result = new ObjectMapper().readValue(request.getInputStream(), Map.class);
 
 
-        foeAusgabe = "test";
 
-        // to send out the json data
-//
+
+
+
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
         PrintWriter pw = response.getWriter();
         pw.println(result);
         pw.close();
 
-//          doGet(request,response);
+
         response.sendRedirect("/FoE/EventBuildings");
     }
 }
