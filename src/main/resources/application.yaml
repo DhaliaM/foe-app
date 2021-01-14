@@ -1,20 +1,20 @@
 buildings:
   #eventgebaeude
-  1:
+  0:
      name: "Hippodrom-Carceres"
      forgepoints: 10
      goods: 18
      coins: 40470
      medals: 36
      galaxie: true
-  2:
+  1:
      name: "Hippodrom-Sphendone"
      forgepoints : 12
      goods: 18
      coins: 55860
      production: 2390
      galaxie: true 
-  3:
+  2:
      name: "Grosser Leuchtturm"
      forgepoints : 8
      coins: 30210
@@ -37,101 +37,101 @@ buildings:
          id: 4
          chance: 0.15
          amount: 1900          
-  4:
+  3:
      name: "Villa des Gouverneurs"
      forgepoints: 8
      goods: 35
      units: 4
      galaxie: true
-  5:
+  4:
      name: "Luftschiff"
      forgepoints: 9
      goods: 20
      coins: 62130
      production: 3370
-  6:
+  5:
      name: "Weltausstellung"
      forgepoints: 10
      goods: 10
      coins: 60990
-  7:
+  6:
      name: "Haus des Wolfs"
      forgepoints: 4
      goods: 5
      coins: 38190
      production: 1990
-  8:
+  7:
      name: "Badehaus"
      forgepoints: 8
      units: 6
      galaxie: true
-  9:
+  8:
      name: "Ehrenstatue - St. 5"
      forgepoints: 6
      coins: 15960
      honorstreets: 1
-  10:
+  9:
      name: "Ehrenstatue - St. 3"
      forgepoints: 6
      coins: 15960
      honorstreets: 2
-  11:
+  10:
      name: "Finsterer Torbogen"
      forgepoints: 3
      coins: 19950
-  12:
+  11:
      name: "Schrein des Wissens"
      forgepoints: 1
      coins: 7980
      count: 6
-  13:
+  12:
      name: "Schrein des Wissens - St. 2"
      forgepoints: 2
      coins: 11514
      count: 2
-  14:
+  13:
      name: "Monument der Helden - St. 7"
      forgepoints: 3
      goods: 6
      medals: 8
      coins: 23940
      production: 4200
-  15:
+  14:
      name: "Farbenfrohe Herbstmuehle"
      forgepoints: 3
      goods: 5
      medals: 16
      coins: 26790
      production: 1060
-  16:
+  15:
      name: "Yggdrasil - St. 3"
      forgepoints: 2
      goods: 10
      medals: 14
      coins: 18240
      production: 3200
-  17:
+  16:
      name: "Terrassenfeld - St. 2"
      forgepoints: 12
      count: 1
-  18:
+  17:
      name: "Opulente Apfelmuehle"
      forgepoints: 7
-  19:
+  18:
      name: "Uralter Obelisk"
      forgepoints: 2
      goods: 4
      coins: 5700
      count: 2
-  20:
+  19:
      name: "Koenigliches Marmortor"
      coins: 6669
-  21:
+  20:
      name: "Sonnenblumenbeet"
      forgepoints: 3
      coins: 4560
      production: 3333
-  22:
+  21:
      name: "Begonienbank"
      forgepoints: 5
      medals: 166
