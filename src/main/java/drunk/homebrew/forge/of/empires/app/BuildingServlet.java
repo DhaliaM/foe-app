@@ -13,24 +13,40 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class BuildingServlet extends HttpServlet {
     Einsammeln income = new Einsammeln();
     Buildings dailyIncome = new Buildings();
 
-    Yaml yaml = new Yaml(new Constructor(LoadProperties.class));
-    InputStream stream = this.getClass().getClassLoader().getResourceAsStream("application.yaml");
-    LoadProperties yamlData = yaml.load(stream);
+//    Yaml yaml = new Yaml(new Constructor(LoadProperties.class));
+//    InputStream stream = this.getClass().getClassLoader().getResourceAsStream("application.yaml");
+//    LoadProperties yamlData = yaml.load(stream);
+
+
+
+    DbAnbindung dbAbfrage = new DbAnbindung();
+    List<Buildings> buildingListe = new ArrayList<Buildings>();
+
+
+
+
+    public BuildingServlet() throws SQLException {
+    }
+
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
 
-
-
-        Map<String, Buildings> eventBuildings = yamlData.getBuildings();
+//        Map<String, Buildings> eventBuildings = yamlData.getBuildings();
 
 
         response.setContentType("text/html");
@@ -60,23 +76,42 @@ public class BuildingServlet extends HttpServlet {
         sb.append("<div class=\"input\">");
         sb.append("<form action=\"EventBuildings\" name=\"buildings\" id=\"buildings\">");
         sb.append("<ul>");
-        for (String key : eventBuildings.keySet()){                                                                     //daten aus der map, atm yaml
+
+        buildingListe = dbAbfrage.buildingsListe;
+        for(Buildings building : buildingListe){
             sb.append("<li>");
             sb.append("<label>");
-            sb.append(eventBuildings.get(key).getName());                                                               //Label Name aus der map
+            sb.append(building.getName());                                                               //Label Name aus der map
             sb.append(" <input type=\"number\" id=\"");                                                                 //input Feld, Id basierned auf der Map
-            sb.append(key);
+            sb.append(building.getId());
             sb.append("\" name=\"");
-            sb.append(eventBuildings.get(key).getName());
+            sb.append(building.getName());
             sb.append("\" value=\"0\" size=\"1\">");
             sb.append(" Anzahl Galaxiebonus ");
             sb.append("<input type =\"number\" id=\"Galaxiebonus.");
-            sb.append(key);
+            sb.append(building.getId());
             sb.append("\" value=\"0\" size=\"1\">");
             sb.append("</label>");
 
             sb.append("</li>");
         }
+//        for (String key : eventBuildings.keySet()){                                                                     //daten aus der map, atm yaml
+//            sb.append("<li>");
+//            sb.append("<label>");
+//            sb.append(eventBuildings.get(key).getName());                                                               //Label Name aus der map
+//            sb.append(" <input type=\"number\" id=\"");                                                                 //input Feld, Id basierned auf der Map
+//            sb.append(key);
+//            sb.append("\" name=\"");
+//            sb.append(eventBuildings.get(key).getName());
+//            sb.append("\" value=\"0\" size=\"1\">");
+//            sb.append(" Anzahl Galaxiebonus ");
+//            sb.append("<input type =\"number\" id=\"Galaxiebonus.");
+//            sb.append(key);
+//            sb.append("\" value=\"0\" size=\"1\">");
+//            sb.append("</label>");
+//
+//            sb.append("</li>");
+//        }
         sb.append("<input type=\"Button\" id=\"submitButton\" onclick=\"submitJson()\" value=\"Submit\">");
         sb.append("</form>");
         sb.append("</div>");
@@ -162,37 +197,37 @@ public class BuildingServlet extends HttpServlet {
         int dailyCoins = 0;
         int dailyDiamonds = 0;
 
-    for(String key : result.keySet()){
-        int anzahl = Integer.parseInt(result.get(key).get("Anzahl"));
-        int gBonus = Integer.parseInt(result.get(key).get("Galaxiebonus"));
-        anzahl = anzahl - gBonus;
-        for(int i = 0;i < anzahl; i++){
-            dailyIncome = income.einsammeln(yamlData, key);
-
-            dailyGoods = dailyGoods + dailyIncome.getGoods();
-
-            dailyForgepoints = dailyForgepoints + dailyIncome.getForgepoints();
-            dailyUnits = dailyUnits + dailyIncome.getUnits();
-            dailyMedals = dailyMedals + dailyIncome.getMedals();
-            dailyProduction = dailyProduction + dailyIncome.getProduction();
-            dailyCoins = dailyCoins + dailyIncome.getCoins();
-            dailyDiamonds = dailyDiamonds + dailyIncome.getDiamonds();
-
-
-        }
-        for(int j = gBonus; j > 0; j--){
-            dailyIncome = income.einsammeln(yamlData, key, true);
-
-            dailyGoods = dailyGoods + dailyIncome.getGoods();
-
-            dailyForgepoints = dailyForgepoints + dailyIncome.getForgepoints();
-            dailyUnits = dailyUnits + dailyIncome.getUnits();
-            dailyMedals = dailyMedals + dailyIncome.getMedals();
-            dailyProduction = dailyProduction + dailyIncome.getProduction();
-            dailyCoins = dailyCoins + dailyIncome.getCoins();
-            dailyDiamonds = dailyDiamonds + dailyIncome.getDiamonds();
-        }
-    }
+//    for(String key : result.keySet()){
+//        int anzahl = Integer.parseInt(result.get(key).get("Anzahl"));
+//        int gBonus = Integer.parseInt(result.get(key).get("Galaxiebonus"));
+//        anzahl = anzahl - gBonus;
+//        for(int i = 0;i < anzahl; i++){
+//            dailyIncome = income.einsammeln(yamlData, key);
+//
+//            dailyGoods = dailyGoods + dailyIncome.getGoods();
+//
+//            dailyForgepoints = dailyForgepoints + dailyIncome.getForgepoints();
+//            dailyUnits = dailyUnits + dailyIncome.getUnits();
+//            dailyMedals = dailyMedals + dailyIncome.getMedals();
+//            dailyProduction = dailyProduction + dailyIncome.getProduction();
+//            dailyCoins = dailyCoins + dailyIncome.getCoins();
+//            dailyDiamonds = dailyDiamonds + dailyIncome.getDiamonds();
+//
+//
+//        }
+//        for(int j = gBonus; j > 0; j--){
+//            dailyIncome = income.einsammeln(yamlData, key, true);
+//
+//            dailyGoods = dailyGoods + dailyIncome.getGoods();
+//
+//            dailyForgepoints = dailyForgepoints + dailyIncome.getForgepoints();
+//            dailyUnits = dailyUnits + dailyIncome.getUnits();
+//            dailyMedals = dailyMedals + dailyIncome.getMedals();
+//            dailyProduction = dailyProduction + dailyIncome.getProduction();
+//            dailyCoins = dailyCoins + dailyIncome.getCoins();
+//            dailyDiamonds = dailyDiamonds + dailyIncome.getDiamonds();
+//        }
+//    }
 
 
 
@@ -209,6 +244,7 @@ public class BuildingServlet extends HttpServlet {
         dailyProduction = 0;
         dailyCoins = 0;
         dailyDiamonds = 0;
+
 
         pw.close();
 

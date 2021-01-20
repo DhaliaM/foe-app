@@ -14,11 +14,13 @@ public class Buildings {
 	private int coins;
 	private boolean galaxie;
 	private int diamonds;
-	
+	private int id;
+
 	private List<Loot> loot;
 	
 	
-	
+	public int getId(){return id;}
+	public void setId(Integer id) {this.id = id;}
 	public String getName() {
 		return name;
 	}
@@ -49,18 +51,18 @@ public class Buildings {
 	public void setMedals(int medals) {
 		this.medals = medals;
 	}
-	public int getHonorstreets() {
-		return honorstreets;
-	}
-	public void setHonorstreets(int honorstreets) {
-		this.honorstreets = honorstreets;
-	}
-	public int getCount() {
-		return count;
-	}
-	public void setCount(int count) {
-		this.count = count;
-	}
+//	public int getHonorstreets() {
+//		return honorstreets;
+//	}
+//	public void setHonorstreets(int honorstreets) {
+//		this.honorstreets = honorstreets;
+//	}
+//	public int getCount() {
+//		return count;
+//	}
+//	public void setCount(int count) {
+//		this.count = count;
+//	}
 	public int getProduction() {
 		return production;
 	}
@@ -75,9 +77,8 @@ public class Buildings {
 	}
 	@Override
 	public String toString() {
-		return "Buildings [name=" + name + ",diamonds=" + diamonds + ", forgepoints=" + forgepoints + ", goods=" + goods + ", units=" + units
-				+ ", medals=" + medals + ", honorstreets=" + honorstreets + ", count=" + count + ", production="
-				+ production + ", coins=" + coins + "]";
+		return "Buildings [id= " + id +" , name=" + name + ",diamonds=" + diamonds + ", forgepoints=" + forgepoints + ", goods=" + goods + ", units=" + units
+				+ ", medals=" + medals + ", production=" + production + ", coins=" + coins + "]";
 	}
 	public List<Loot> getLoot() {
 		return loot;
@@ -85,12 +86,12 @@ public class Buildings {
 	public void setLoot(List<Loot> Loot) {
 		this.loot = Loot;
 	}
-	public boolean isGalaxie() {
-		return galaxie;
-	}
-	public void setGalaxie(boolean galaxie) {
-		this.galaxie = galaxie;
-	}
+//	public boolean isGalaxie() {
+//		return galaxie;
+//	}
+//	public void setGalaxie(boolean galaxie) {
+//		this.galaxie = galaxie;
+//	}
 	public int getDiamonds() {
 		return diamonds;
 	}
