@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +39,7 @@ public class BuildingServlet extends HttpServlet {
 
 
 
-    public BuildingServlet() throws SQLException {
+    public BuildingServlet() throws SQLException, NamingException {
     }
 
 
@@ -77,11 +78,18 @@ public class BuildingServlet extends HttpServlet {
         sb.append("<form action=\"EventBuildings\" name=\"buildings\" id=\"buildings\">");
         sb.append("<ul>");
 
-        buildingListe = dbAbfrage.buildingsListe;
+        try {
+            buildingListe = dbAbfrage.sqlAusgabe();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+//        sb.append("console.log(");
+//        sb.append("buildingListe");
+//        sb.append(");");
         for(Buildings building : buildingListe){
             sb.append("<li>");
             sb.append("<label>");
-            sb.append(building.getName());                                                               //Label Name aus der map
+            sb.append(building.getName());                                                                              //Label Name aus der map
             sb.append(" <input type=\"number\" id=\"");                                                                 //input Feld, Id basierned auf der Map
             sb.append(building.getId());
             sb.append("\" name=\"");
@@ -197,37 +205,42 @@ public class BuildingServlet extends HttpServlet {
         int dailyCoins = 0;
         int dailyDiamonds = 0;
 
-//    for(String key : result.keySet()){
-//        int anzahl = Integer.parseInt(result.get(key).get("Anzahl"));
-//        int gBonus = Integer.parseInt(result.get(key).get("Galaxiebonus"));
-//        anzahl = anzahl - gBonus;
-//        for(int i = 0;i < anzahl; i++){
-//            dailyIncome = income.einsammeln(yamlData, key);
-//
-//            dailyGoods = dailyGoods + dailyIncome.getGoods();
-//
-//            dailyForgepoints = dailyForgepoints + dailyIncome.getForgepoints();
-//            dailyUnits = dailyUnits + dailyIncome.getUnits();
-//            dailyMedals = dailyMedals + dailyIncome.getMedals();
-//            dailyProduction = dailyProduction + dailyIncome.getProduction();
-//            dailyCoins = dailyCoins + dailyIncome.getCoins();
-//            dailyDiamonds = dailyDiamonds + dailyIncome.getDiamonds();
-//
-//
-//        }
-//        for(int j = gBonus; j > 0; j--){
-//            dailyIncome = income.einsammeln(yamlData, key, true);
-//
-//            dailyGoods = dailyGoods + dailyIncome.getGoods();
-//
-//            dailyForgepoints = dailyForgepoints + dailyIncome.getForgepoints();
-//            dailyUnits = dailyUnits + dailyIncome.getUnits();
-//            dailyMedals = dailyMedals + dailyIncome.getMedals();
-//            dailyProduction = dailyProduction + dailyIncome.getProduction();
-//            dailyCoins = dailyCoins + dailyIncome.getCoins();
-//            dailyDiamonds = dailyDiamonds + dailyIncome.getDiamonds();
-//        }
-//    }
+        int id = 0;
+
+    for(String key : result.keySet()){
+        int anzahl = Integer.parseInt(result.get(key).get("Anzahl"));
+        int gBonus = Integer.parseInt(result.get(key).get("Galaxiebonus"));
+        anzahl = anzahl - gBonus;
+        id = Integer.parseInt(key);
+
+        for(int i = 0;i < anzahl; i++){
+            dailyIncome = income.einsammeln(buildingListe, id);
+
+            dailyGoods = dailyGoods + dailyIncome.getGoods();
+
+            dailyForgepoints = dailyForgepoints + dailyIncome.getForgepoints();
+            dailyUnits = dailyUnits + dailyIncome.getUnits();
+            dailyMedals = dailyMedals + dailyIncome.getMedals();
+            dailyProduction = dailyProduction + dailyIncome.getProduction();
+            dailyCoins = dailyCoins + dailyIncome.getCoins();
+            dailyDiamonds = dailyDiamonds + dailyIncome.getDiamonds();
+
+
+        }
+        for(int j = gBonus; j > 0; j--){
+
+            dailyIncome = income.einsammeln( buildingListe, id , true);
+
+            dailyGoods = dailyGoods + dailyIncome.getGoods();
+
+            dailyForgepoints = dailyForgepoints + dailyIncome.getForgepoints();
+            dailyUnits = dailyUnits + dailyIncome.getUnits();
+            dailyMedals = dailyMedals + dailyIncome.getMedals();
+            dailyProduction = dailyProduction + dailyIncome.getProduction();
+            dailyCoins = dailyCoins + dailyIncome.getCoins();
+            dailyDiamonds = dailyDiamonds + dailyIncome.getDiamonds();
+        }
+    }
 
 
 

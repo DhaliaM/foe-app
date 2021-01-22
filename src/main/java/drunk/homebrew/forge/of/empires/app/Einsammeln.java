@@ -23,46 +23,47 @@ public class Einsammeln {
 	private int coins;
 	
 	
-	Buildings einsammeln(LoadProperties yamlData, String building) {
-		Map<String, Buildings> productionBuildings = yamlData.getBuildings();
-		Buildings targetBuilding = productionBuildings.get(building);
+	Buildings einsammeln(List<Buildings> buildings, Integer id) {
+//		Map<String, Buildings> productionBuildings = yamlData.getBuildings();
+
 		//List<Loot> bonusListe = targetBuilding.getLoot();
+
+
+
 		Buildings result = new Buildings();
-		//Buildings lTurm = new BonusPool();
+//		//Buildings lTurm = new BonusPool();
 		int faktor = 1;
-		
-		
-		
-		
-		
-		if(productionBuildings.get(building).equals(productionBuildings.get("2"))){
+
+
+
+		if(buildings.get(id).getName().equals("Leuchtturm")){
 			Random rng = new Random();
 			Integer zufallszahl = rng.nextInt(101);
-			
-			result = new BonusPool().poolLeuchtturm(productionBuildings.get("2"), zufallszahl);
-			
-			
-			//LOGGER.error("L-Turm ist vorhanden " + result);	
-			
+
+			result = new BonusPool().poolLeuchtturm(buildings.get(id), zufallszahl);
+
+
+			//LOGGER.error("L-Turm ist vorhanden " + result);
+
 		}
-		
-		
-		
+
+
+
 //		if(productionBuildings.get(building).isGalaxie()) {
 //			//Galaxiechance
 //			if(bonus.chance(0.3)) {
 //				faktor = 2;
 //			}
 //		}
-		
-			coins = targetBuilding.getCoins() * faktor;
-			goods = targetBuilding.getGoods() * faktor;
-			units = targetBuilding.getUnits() * faktor;
-			medals = targetBuilding.getMedals() * faktor;
-			forgepoints = targetBuilding.getForgepoints() * faktor;
-			production = targetBuilding.getProduction() * faktor;
-			diamonds = targetBuilding.getDiamonds() * faktor;
-		
+
+			coins = buildings.get(id).getCoins() * faktor;
+			goods = buildings.get(id).getGoods() * faktor;
+			units = buildings.get(id).getUnits() * faktor;
+			medals = buildings.get(id).getMedals() * faktor;
+			forgepoints = buildings.get(id).getForgepoints() * faktor;
+			production = buildings.get(id).getProduction() * faktor;
+			diamonds = buildings.get(id).getDiamonds() * faktor;
+
 			result.setCoins(coins);
 			result.setForgepoints(forgepoints);
 			result.setGoods(goods);
@@ -70,13 +71,13 @@ public class Einsammeln {
 			result.setMedals(medals);
 			result.setProduction(production);
 			result.setDiamonds(diamonds);
-			
+
 		return result;
 	}
 
-	Buildings einsammeln(LoadProperties yamlData, String building, Boolean gBonus) {
-		Map<String, Buildings> productionBuildings = yamlData.getBuildings();
-		Buildings targetBuilding = productionBuildings.get(building);
+	Buildings einsammeln(List<Buildings> buildings, Integer id, Boolean gBonus) {
+//		Map<String, Buildings> productionBuildings = yamlData.getBuildings();
+//		Buildings targetBuilding = productionBuildings.get(building);
 		//List<Loot> bonusListe = targetBuilding.getLoot();
 		Buildings result = new Buildings();
 		//Buildings lTurm = new BonusPool();
@@ -86,11 +87,11 @@ public class Einsammeln {
 
 
 
-		if(productionBuildings.get(building).equals(productionBuildings.get("3"))){
+		if(buildings.get(id).getName().equals("Leuchtturm")){
 			Random rng = new Random();
 			Integer zufallszahl = rng.nextInt(101);
 
-			result = new BonusPool().poolLeuchtturm(productionBuildings.get("3"), zufallszahl);
+			result = new BonusPool().poolLeuchtturm(buildings.get(id), zufallszahl);
 
 
 			//LOGGER.error("L-Turm ist vorhanden " + result);
@@ -106,13 +107,13 @@ public class Einsammeln {
 			}
 		}
 
-		coins = targetBuilding.getCoins() * faktor;
-		goods = targetBuilding.getGoods() * faktor;
-		units = targetBuilding.getUnits() * faktor;
-		medals = targetBuilding.getMedals() * faktor;
-		forgepoints = targetBuilding.getForgepoints() * faktor;
-		production = targetBuilding.getProduction() * faktor;
-		diamonds = targetBuilding.getDiamonds() * faktor;
+		coins = buildings.get(id).getCoins() * faktor;
+		goods = buildings.get(id).getGoods() * faktor;
+		units = buildings.get(id).getUnits() * faktor;
+		medals = buildings.get(id).getMedals() * faktor;
+		forgepoints = buildings.get(id).getForgepoints() * faktor;
+		production = buildings.get(id).getProduction() * faktor;
+		diamonds = buildings.get(id).getDiamonds() * faktor;
 
 		result.setCoins(coins);
 		result.setForgepoints(forgepoints);

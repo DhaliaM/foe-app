@@ -4,6 +4,10 @@ import org.apache.logging.slf4j.Log4jLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +23,10 @@ public class DbAnbindung {
     String userName = "FoE_User";
     String password = "roflcopter";
 
-    Connection connection = DriverManager.getConnection(url, userName ,password);
+    Context ctx = new InitialContext();
+    DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/Foe");
+    Connection connection = ds.getConnection();
+//    Connection connection = DriverManager.getConnection(url, userName ,password);
 
     Statement sqlStatement = connection.createStatement();
 
@@ -48,6 +55,6 @@ public class DbAnbindung {
     }
 
 
-    public DbAnbindung() throws SQLException {
+    public DbAnbindung() throws SQLException, NamingException {
     }
 }

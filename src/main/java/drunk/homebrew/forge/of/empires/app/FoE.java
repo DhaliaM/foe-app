@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
-
+import javax.naming.NamingException;
 
 
 /**
@@ -33,7 +33,7 @@ public class FoE {
 	}
 
 
-	public static void main(String[] args) throws JsonProcessingException, SQLException {
+	public static void main(String[] args) throws JsonProcessingException, SQLException, NamingException {
 		//BonusChance chance = new BonusChance();
 		Einsammeln sammlung = new Einsammeln();
 //		Buildings specialBuildings = new Buildings(); //für Sql
