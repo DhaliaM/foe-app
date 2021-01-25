@@ -1,6 +1,5 @@
-package drunk.homebrew.forge.of.empires.app;
+package drunk.homebrew.forge.of.empires.app.persistence;
 
-import org.apache.logging.slf4j.Log4jLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,7 +30,7 @@ public class DbAnbindung {
     Statement sqlStatement = connection.createStatement();
 
 
-    public List sqlAusgabe() throws SQLException {
+    public List<Buildings> sqlAusgabe() throws SQLException {
 
         ResultSet result = sqlStatement.executeQuery("SELECT * FROM Spezialgebäude;");
 

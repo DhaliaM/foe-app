@@ -1,17 +1,22 @@
-package drunk.homebrew.forge.of.empires.app;
+package drunk.homebrew.forge.of.empires.app.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-
+import drunk.homebrew.forge.of.empires.app.persistence.Buildings;
+import drunk.homebrew.forge.of.empires.app.persistence.DbAnbindung;
+import drunk.homebrew.forge.of.empires.app.ui.BuildingDto;
 
 import javax.naming.NamingException;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class AuswertungServlet {
 
-    public String auswerten(Map<String, Map<String,String>> input) throws SQLException, NamingException {
+    public String auswerten(List<BuildingDto> input) throws SQLException, NamingException {
 
 //        Map<String, Map<String,String>> result = new ObjectMapper().readValue(input, Map.class);
 
@@ -38,29 +43,16 @@ public class AuswertungServlet {
 
         int id = 0;
 
-        for(String key : input.keySet()){                                                                               // aus irgendeinem grund hakts wohl ab hier mit dem Index
-            int anzahl = Integer.parseInt(input.get(key).get("Anzahl"));
-            int gBonus = Integer.parseInt(input.get(key).get("Galaxiebonus"));
-            anzahl = anzahl - gBonus;
-            id = Integer.parseInt(key);
+        for(BuildingDto dto : input){                                                                               // aus irgendeinem grund hakts wohl ab hier mit dem Index
+            int anzahl = dto.getCount();
+            int gBonus = dto.getBonus();
+//            anzahl = anzahl - gBonus;
+            id = dto.getId();
 
-            for(int i = 0;i < anzahl; i++){
-                dailyIncome = income.einsammeln(buildingListe, id);
+            for(int current= 0; current < anzahl; current++){
 
-                dailyGoods = dailyGoods + dailyIncome.getGoods();
-
-                dailyForgepoints = dailyForgepoints + dailyIncome.getForgepoints();
-                dailyUnits = dailyUnits + dailyIncome.getUnits();
-                dailyMedals = dailyMedals + dailyIncome.getMedals();
-                dailyProduction = dailyProduction + dailyIncome.getProduction();
-                dailyCoins = dailyCoins + dailyIncome.getCoins();
-                dailyDiamonds = dailyDiamonds + dailyIncome.getDiamonds();
-
-
-            }
-            for(int j = gBonus; j > 0; j--){
-
-                dailyIncome = income.einsammeln( buildingListe, id , true);
+                final boolean isBonusIteration = current < gBonus;
+                dailyIncome = income.einsammeln(buildingListe, id, isBonusIteration);
 
                 dailyGoods = dailyGoods + dailyIncome.getGoods();
 
@@ -73,7 +65,7 @@ public class AuswertungServlet {
             }
         }
 
-        Map<String,String> ergebnis = new HashMap();
+        Map<String,String> ergebnis = new HashMap<>();
         ergebnis.put("Forgepunkte", Integer.toString(dailyForgepoints));
         ergebnis.put("Güter", Integer.toString(dailyGoods));
         ergebnis.put("Vorrat", Integer.toString(dailyProduction));
@@ -86,14 +78,14 @@ public class AuswertungServlet {
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT );
 
-        String jsonString = new String();
         try {
-            jsonString = mapper.writeValueAsString(ergebnis);
+            return mapper.writeValueAsString(ergebnis);
         }catch (JsonProcessingException e){
             e.printStackTrace();
+            return "";
         }
 
-    return jsonString;
+
     }
 
 }

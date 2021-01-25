@@ -1,4 +1,4 @@
-package drunk.homebrew.forge.of.empires.app;
+package drunk.homebrew.forge.of.empires.app.service;
 
 import java.util.Random;
 
@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 
 public class BonusChance {
 	//private static final Logger LOGGER = LoggerFactory.getLogger(BonusChance.class);
-	
+
 	public boolean chance(double d) {
 		Random rng = new Random();
 		Integer zufallszahl = rng.nextInt(101);

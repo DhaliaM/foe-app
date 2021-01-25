@@ -1,4 +1,4 @@
-package drunk.homebrew.forge.of.empires.app;
+package drunk.homebrew.forge.of.empires.app.persistence;
 
 import java.util.List;
 
@@ -17,8 +17,8 @@ public class Buildings {
 	private int id;
 
 	private List<Loot> loot;
-	
-	
+
+
 	public int getId(){return id;}
 	public void setId(Integer id) {this.id = id;}
 	public String getName() {
@@ -98,6 +98,6 @@ public class Buildings {
 	public void setDiamonds(int diamonds) {
 		this.diamonds = diamonds;
 	}
-	
-		
+
+
 }

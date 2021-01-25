@@ -1,24 +1,19 @@
-package drunk.homebrew.forge.of.empires.app;
+package drunk.homebrew.forge.of.empires.app.legacy;
 
-import java.io.InputStream;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import drunk.homebrew.forge.of.empires.app.persistence.DbAnbindung;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import javax.naming.NamingException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Map;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.constructor.Constructor;
-
-import javax.naming.NamingException;
 
 
 /**
  * Hauptklasse zum starten der App
- * 
+ *
  * @author b13r/Dhalia
  *
  */
@@ -35,7 +30,7 @@ public class FoE {
 
 	public static void main(String[] args) throws JsonProcessingException, SQLException, NamingException {
 		//BonusChance chance = new BonusChance();
-		Einsammeln sammlung = new Einsammeln();
+//		Einsammeln sammlung = new Einsammeln();
 //		Buildings specialBuildings = new Buildings(); //für Sql
 //		Buildings dailyIncome = new Buildings();
 

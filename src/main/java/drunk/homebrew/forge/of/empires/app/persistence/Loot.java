@@ -1,11 +1,11 @@
-package drunk.homebrew.forge.of.empires.app;
+package drunk.homebrew.forge.of.empires.app.persistence;
 
 public class Loot {
 	private long id;
 	private float chance;
 	private int amount;
-	
-	
+
+
 	public long getId() {
 		return id;
 	}
@@ -24,6 +24,6 @@ public class Loot {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
-	
-	
+
+
 }
