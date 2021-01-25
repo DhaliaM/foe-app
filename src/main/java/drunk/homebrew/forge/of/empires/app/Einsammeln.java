@@ -36,7 +36,7 @@ public class Einsammeln {
 
 
 
-		if(buildings.get(id).getName().equals("Leuchtturm")){
+		if(buildings.get(id).getName().equals("Grosser Leuchtturm")){
 			Random rng = new Random();
 			Integer zufallszahl = rng.nextInt(101);
 

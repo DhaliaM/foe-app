@@ -24,8 +24,8 @@ import java.util.List;
 import java.util.Map;
 
 public class BuildingServlet extends HttpServlet {
-    Einsammeln income = new Einsammeln();
-    Buildings dailyIncome = new Buildings();
+//    Einsammeln income = new Einsammeln();
+//    Buildings dailyIncome = new Buildings();
 
 //    Yaml yaml = new Yaml(new Constructor(LoadProperties.class));
 //    InputStream stream = this.getClass().getClassLoader().getResourceAsStream("application.yaml");
@@ -165,7 +165,7 @@ public class BuildingServlet extends HttpServlet {
         sb.append("dataInArray.set(element.id, inputData);");
         sb.append("}");                                                                                                 // schließt if statement
         sb.append("}");                                                                                                 // schließt for
-        sb.append("console.log(dataInArray);");
+//        sb.append("console.log(dataInArray);");
         sb.append("var dataJson = mapToObjectRec(dataInArray);");
         sb.append("var dataJson = JSON.stringify(dataJson);");
         sb.append("var xhr = new XMLHttpRequest();");
@@ -195,68 +195,26 @@ public class BuildingServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Map<String, Map<String,String>> result = new ObjectMapper().readValue(request.getInputStream(), Map.class);
+        Map<String, Map<String,String>> result = new ObjectMapper().readValue(request.getReader(), Map.class);
 
-        int dailyForgepoints = 0;
-        int dailyGoods = 0;
-        int dailyUnits = 0;
-        int dailyMedals = 0;
-        int dailyProduction = 0;
-        int dailyCoins = 0;
-        int dailyDiamonds = 0;
-
-        int id = 0;
-
-    for(String key : result.keySet()){
-        int anzahl = Integer.parseInt(result.get(key).get("Anzahl"));
-        int gBonus = Integer.parseInt(result.get(key).get("Galaxiebonus"));
-        anzahl = anzahl - gBonus;
-        id = Integer.parseInt(key);
-
-        for(int i = 0;i < anzahl; i++){
-            dailyIncome = income.einsammeln(buildingListe, id);
-
-            dailyGoods = dailyGoods + dailyIncome.getGoods();
-
-            dailyForgepoints = dailyForgepoints + dailyIncome.getForgepoints();
-            dailyUnits = dailyUnits + dailyIncome.getUnits();
-            dailyMedals = dailyMedals + dailyIncome.getMedals();
-            dailyProduction = dailyProduction + dailyIncome.getProduction();
-            dailyCoins = dailyCoins + dailyIncome.getCoins();
-            dailyDiamonds = dailyDiamonds + dailyIncome.getDiamonds();
+        AuswertungServlet auswertung = new AuswertungServlet();
 
 
+        String ergebnis = new String();
+        try {
+            ergebnis = auswertung.auswerten(result);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } catch (NamingException e) {
+            e.printStackTrace();
         }
-        for(int j = gBonus; j > 0; j--){
-
-            dailyIncome = income.einsammeln( buildingListe, id , true);
-
-            dailyGoods = dailyGoods + dailyIncome.getGoods();
-
-            dailyForgepoints = dailyForgepoints + dailyIncome.getForgepoints();
-            dailyUnits = dailyUnits + dailyIncome.getUnits();
-            dailyMedals = dailyMedals + dailyIncome.getMedals();
-            dailyProduction = dailyProduction + dailyIncome.getProduction();
-            dailyCoins = dailyCoins + dailyIncome.getCoins();
-            dailyDiamonds = dailyDiamonds + dailyIncome.getDiamonds();
-        }
-    }
-
-
 
 
         response.setContentType("text/html");
         response.setCharacterEncoding("UTF-8");
         PrintWriter pw = response.getWriter();
-        pw.println("tägliche FP = "+ dailyForgepoints + " tägliche Einheiten = " + dailyUnits + " tägliche Diamanten = " + dailyDiamonds + " tägliche Medailien = " + dailyMedals + " tägliche Produktion = " + dailyProduction + " tägliche Münzen = " + dailyCoins + " tägliche Güter = " + dailyGoods);
+        pw.println("result enthält = " + ergebnis);
 
-        dailyForgepoints = 0;
-        dailyGoods = 0;
-        dailyUnits = 0;
-        dailyMedals = 0;
-        dailyProduction = 0;
-        dailyCoins = 0;
-        dailyDiamonds = 0;
 
 
         pw.close();
