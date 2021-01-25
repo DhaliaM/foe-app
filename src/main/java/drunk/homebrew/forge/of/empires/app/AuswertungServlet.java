@@ -38,7 +38,7 @@ public class AuswertungServlet {
 
         int id = 0;
 
-        for(String key : input.keySet()){                                                                               // aus irgendeinbem grund hakts wohl ab hier mit dem Index
+        for(String key : input.keySet()){                                                                               // aus irgendeinem grund hakts wohl ab hier mit dem Index
             int anzahl = Integer.parseInt(input.get(key).get("Anzahl"));
             int gBonus = Integer.parseInt(input.get(key).get("Galaxiebonus"));
             anzahl = anzahl - gBonus;
