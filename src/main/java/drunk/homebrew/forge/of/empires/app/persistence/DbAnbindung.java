@@ -1,6 +1,5 @@
-package drunk.homebrew.forge.of.empires.app;
+package drunk.homebrew.forge.of.empires.app.persistence;
 
-import org.apache.logging.slf4j.Log4jLogger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,20 +17,15 @@ public class DbAnbindung {
 
     List<Buildings> buildingsListe = new ArrayList<Buildings>();
 
-    String url = "jdbc:mariadb://localhost:3306/FoE1?zeroDateTimeBehavior=convertToNull";
-    String databaseName = "FoE1";
-    String userName = "FoE_User";
-    String password = "roflcopter";
-
     Context ctx = new InitialContext();
     DataSource ds = (DataSource) ctx.lookup("java:/comp/env/jdbc/Foe");
     Connection connection = ds.getConnection();
-//    Connection connection = DriverManager.getConnection(url, userName ,password);
+
 
     Statement sqlStatement = connection.createStatement();
 
 
-    public List sqlAusgabe() throws SQLException {
+    public List<Buildings> sqlAusgabe() throws SQLException {
 
         ResultSet result = sqlStatement.executeQuery("SELECT * FROM Spezialgebäude;");
 
@@ -49,7 +43,6 @@ public class DbAnbindung {
             building.setMedals(result.getInt("Medaillen"));
             building.setDiamonds(result.getInt("Diamanten"));
             buildingsListe.add(building);
-            //LOGGER.error(result.getString("Name"));
         }
         return buildingsListe;
     }

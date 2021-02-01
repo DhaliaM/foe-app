@@ -1,4 +1,4 @@
-package drunk.homebrew.forge.of.empires.app;
+package drunk.homebrew.forge.of.empires.app.service;
 
 import java.util.Random;
 

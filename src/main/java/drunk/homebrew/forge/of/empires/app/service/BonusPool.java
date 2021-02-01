@@ -1,7 +1,9 @@
-package drunk.homebrew.forge.of.empires.app;
+package drunk.homebrew.forge.of.empires.app.service;
 
 import java.util.Random;
 
+import drunk.homebrew.forge.of.empires.app.legacy.FoE;
+import drunk.homebrew.forge.of.empires.app.persistence.Buildings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

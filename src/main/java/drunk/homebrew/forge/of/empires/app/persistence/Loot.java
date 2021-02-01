@@ -1,4 +1,4 @@
-package drunk.homebrew.forge.of.empires.app;
+package drunk.homebrew.forge.of.empires.app.persistence;
 
 public class Loot {
 	private long id;

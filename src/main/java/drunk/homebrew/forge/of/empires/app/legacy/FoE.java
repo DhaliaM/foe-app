@@ -1,17 +1,14 @@
-package drunk.homebrew.forge.of.empires.app;
+package drunk.homebrew.forge.of.empires.app.legacy;
 
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import drunk.homebrew.forge.of.empires.app.persistence.DbAnbindung;
+import drunk.homebrew.forge.of.empires.app.service.Einsammeln;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.constructor.Constructor;
 
 import javax.naming.NamingException;
 

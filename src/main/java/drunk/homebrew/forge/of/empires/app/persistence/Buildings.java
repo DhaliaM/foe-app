@@ -1,4 +1,4 @@
-package drunk.homebrew.forge.of.empires.app;
+package drunk.homebrew.forge.of.empires.app.persistence;
 
 import java.util.List;
 
@@ -51,18 +51,7 @@ public class Buildings {
 	public void setMedals(int medals) {
 		this.medals = medals;
 	}
-//	public int getHonorstreets() {
-//		return honorstreets;
-//	}
-//	public void setHonorstreets(int honorstreets) {
-//		this.honorstreets = honorstreets;
-//	}
-//	public int getCount() {
-//		return count;
-//	}
-//	public void setCount(int count) {
-//		this.count = count;
-//	}
+
 	public int getProduction() {
 		return production;
 	}
@@ -86,12 +75,7 @@ public class Buildings {
 	public void setLoot(List<Loot> Loot) {
 		this.loot = Loot;
 	}
-//	public boolean isGalaxie() {
-//		return galaxie;
-//	}
-//	public void setGalaxie(boolean galaxie) {
-//		this.galaxie = galaxie;
-//	}
+
 	public int getDiamonds() {
 		return diamonds;
 	}
