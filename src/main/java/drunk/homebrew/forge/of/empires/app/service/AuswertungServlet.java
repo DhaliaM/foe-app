@@ -42,9 +42,9 @@ public class AuswertungServlet {
         int id = 0;
 
         for(BuildingDto dto : input){                                                                               // aus irgendeinem grund hakts wohl ab hier mit dem Index
-            int anzahl = dto.getCount();
-            int gBonus = dto.getBonus();
-//            anzahl = anzahl - gBonus;
+            int anzahl = dto.getCount(); //Anzahl des jeweiligen Gebäudes
+            int gBonus = dto.getBonus(); //Anzahl des jeweiligen Gebäudes mit Bonus
+
             id = dto.getId();
 
             for(int current = 0; current < anzahl; current++){

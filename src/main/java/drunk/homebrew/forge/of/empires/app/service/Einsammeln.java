@@ -1,6 +1,7 @@
 package drunk.homebrew.forge.of.empires.app.service;
 
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Random;
 
 import drunk.homebrew.forge.of.empires.app.persistence.Buildings;
@@ -29,11 +30,8 @@ public class Einsammeln {
 		Buildings result = new Buildings();
 		int faktor = 1;
 
-		if(buildings.get(id).getName().equals("Grosser Leuchtturm")){
-			Random rng = new Random();
-			Integer zufallszahl = rng.nextInt(101);
-			result = new BonusPool().poolLeuchtturm(buildings.get(id), zufallszahl);
-		}
+		ListIterator<Buildings> buildingsIterator = buildings.listIterator(0);
+
 
 		if(gBonus) {
 			//Galaxiechance
@@ -42,13 +40,35 @@ public class Einsammeln {
 			}
 		}
 
-		coins = buildings.get(id).getCoins() * faktor;
-		goods = buildings.get(id).getGoods() * faktor;
-		units = buildings.get(id).getUnits() * faktor;
-		medals = buildings.get(id).getMedals() * faktor;
-		forgepoints = buildings.get(id).getForgepoints() * faktor;
-		production = buildings.get(id).getProduction() * faktor;
-		diamonds = buildings.get(id).getDiamonds() * faktor;
+
+		Boolean noHit = true;
+		Integer counter = 0;
+
+		while(buildingsIterator.hasNext() && noHit) {
+			Buildings buildingItr = buildings.get(counter);
+			if(buildingItr.getName().equals("Grosser Leuchtturm")){
+				Random rng = new Random();
+				Integer zufallszahl = rng.nextInt(101);
+				result = new BonusPool().poolLeuchtturm(buildings.get(counter), zufallszahl);
+			}
+
+				if (buildingItr.getId() == id) {
+
+					coins = buildingItr.getCoins() * faktor;
+					goods = buildingItr.getGoods() * faktor;
+					units = buildingItr.getUnits() * faktor;
+					medals = buildingItr.getMedals() * faktor;
+					forgepoints = buildingItr.getForgepoints() * faktor;
+					production = buildingItr.getProduction() * faktor;
+					diamonds = buildingItr.getDiamonds() * faktor;
+					noHit = false;
+				}
+				else {
+					counter++;
+				}
+		}
+
+
 
 		result.setCoins(coins);
 		result.setForgepoints(forgepoints);

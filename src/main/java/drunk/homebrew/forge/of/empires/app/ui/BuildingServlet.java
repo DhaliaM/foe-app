@@ -18,14 +18,13 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
 
 public class BuildingServlet extends HttpServlet {
 
 
     public BuildingServlet() throws SQLException, NamingException {
     }
-
 
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -76,12 +75,12 @@ public class BuildingServlet extends HttpServlet {
                 sb.append(str + "\n");
             }
         }
-            response.setContentType("text/html");
-            response.setCharacterEncoding("UTF-8");
-            PrintWriter pw = response.getWriter();
+        response.setContentType("text/html");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter pw = response.getWriter();
 
-            pw.println(sb);
-            pw.close();
+        pw.println(sb);
+        pw.close();
 
     }
 
@@ -114,7 +113,7 @@ public class BuildingServlet extends HttpServlet {
         pw.close();
 
 
-        response.sendRedirect("/FoE/EventBuildings");
+//        response.sendRedirect("/FoE/EventBuildings");
 
 
     }

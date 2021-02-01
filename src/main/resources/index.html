@@ -18,7 +18,29 @@
         </form>
     </div>
     <div id="output" class="output">Ausgabe</div>
-    <script>const form = document.querySelector('form');form.addEventListener('submit', event => {event.preventDefault()});function mapToObjectRec(m) {let lo = {};for(let[k,v] of m){if(v instanceof Map){lo[k] = mapToObjectRec(v);}else {lo[k] = v;}}return lo;}function submitJson(){var dataForm = document.getElementById("buildings");var dataInArray = new Map();for(let element of dataForm.elements){let shortId = element.id;shortId = shortId.split(".",1);if(shortId != "Galaxiebonus" && shortId != "submitButton"){let inputData = new Map();inputData.set('Anzahl', element.value);inputData.set('Galaxiebonus', document.getElementById("Galaxiebonus." + element.id).value);dataInArray.set(element.id, inputData);}}var dataJson = mapToObjectRec(dataInArray);var dataJson = JSON.stringify(dataJson);var xhr = new XMLHttpRequest();xhr.onreadystatechange = function() {if (this.readyState == 4 && this.status == 200) {console.log(this.responseText);document.getElementById("output").innerHTML = this.responseText;}};xhr.open("POST", "/FoE/EventBuildings", true);xhr.setRequestHeader('Content-Type', 'application/json');xhr.send(dataJson);}document.getElementById("buildings").onsubmit = function(){location.reload(true);}</script>
+    <script>const form = document.querySelector('form');
+    form.addEventListener('submit', event => {
+    event.preventDefault()
+    });
+
+    function mapToObjectRec(m) {
+        let lo = {};
+        for (let [k, v] of m) {
+            if (v instanceof Map) {
+                lo[k] = mapToObjectRec(v);
+            }
+            else {lo[k] = v;
+            }
+        }
+        return lo;
+    }
+
+    class Building {
+        constructor(id, count, bonus) {
+            this.id = parseInt(id);
+            this.count = parseInt(count);
+
+    function submitJson(){var dataForm = document.getElementById("buildings");var dataInArray = new Map();for(let element of dataForm.elements){let shortId = element.id;shortId = shortId.split(".",1);if(shortId != "Galaxiebonus" && shortId != "submitButton"){let inputData = new Map();inputData.set('Anzahl', element.value);inputData.set('Galaxiebonus', document.getElementById("Galaxiebonus." + element.id).value);dataInArray.set(element.id, inputData);}}var dataJson = mapToObjectRec(dataInArray);var dataJson = JSON.stringify(dataJson);var xhr = new XMLHttpRequest();xhr.onreadystatechange = function() {if (this.readyState == 4 && this.status == 200) {console.log(this.responseText);document.getElementById("output").innerHTML = this.responseText;}};xhr.open("POST", "/FoE/EventBuildings", true);xhr.setRequestHeader('Content-Type', 'application/json');xhr.send(dataJson);}document.getElementById("buildings").onsubmit = function(){location.reload(true);}</script>
 </div>
 </body>
 </html>
