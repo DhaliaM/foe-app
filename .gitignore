@@ -27,3 +27,6 @@ target/
 .classpath
 .factorypath
 .project
+
+.idea
+*.iml
