@@ -42,7 +42,7 @@ public class BuildingServlet extends HttpServlet {
 
         List<Buildings> buildingListe = new ArrayList<Buildings>();
 
-        InputStreamReader isReader = new InputStreamReader(getClass().getResourceAsStream("/index.html"));
+        InputStreamReader isReader = new InputStreamReader(getClass().getResourceAsStream("/classes/building.html"));
         BufferedReader reader = new BufferedReader(isReader);
         StringBuffer sb = new StringBuffer();
         String str;

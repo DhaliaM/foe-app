@@ -57,17 +57,7 @@ public class FoE {
 		int dailyDiamonds = 0;
 
 
-//		Yaml yaml = new Yaml(new Constructor(LoadProperties.class));
-//		InputStream stream = FoE.class.getClassLoader().getResourceAsStream("application.yaml");
-//		LoadProperties yamlData = yaml.load(stream);
 
-
-//		TransmitBuildings transmitBuildings = new TransmitBuildings();
-//		String buildings = transmitBuildings.transmitBuildings();
-
-//		LOGGER.error("Inhalt des Json Objects " + buildings);
-
-//		Map<String, Buildings> specialBuildings = yamlData.getBuildings();
 
 		String url = "jdbc:mariadb://localhost:3306/FoE1?zeroDateTimeBehavior=convertToNull";
 		String databaseName = "FoE1";
