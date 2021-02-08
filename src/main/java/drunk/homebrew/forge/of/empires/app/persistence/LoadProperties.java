@@ -1,5 +1,6 @@
-package drunk.homebrew.forge.of.empires.app;
+package drunk.homebrew.forge.of.empires.app.persistence;
 
+import drunk.homebrew.forge.of.empires.app.persistence.Bonus;
 import drunk.homebrew.forge.of.empires.app.persistence.Buildings;
 
 import java.util.HashMap;

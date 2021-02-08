@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 public class BuildingsController {
 
-    @GetMapping(path = "EventBuildings", produces="text/plain")
+    @GetMapping(path = "/EventBuildings")
     public String seitenaufbau() throws Exception {
 
 
@@ -25,7 +25,7 @@ public class BuildingsController {
 
         List<Buildings> buildingListe = new ArrayList<Buildings>();
 
-        InputStreamReader isReader = new InputStreamReader(getClass().getResourceAsStream("/classes/building.html"));
+        InputStreamReader isReader = new InputStreamReader(getClass().getResourceAsStream("/building.html"));
         BufferedReader reader = new BufferedReader(isReader);
         StringBuffer sb = new StringBuffer();
         String str;

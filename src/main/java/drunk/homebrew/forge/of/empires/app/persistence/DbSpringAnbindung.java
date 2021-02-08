@@ -1,16 +1,19 @@
 package drunk.homebrew.forge.of.empires.app.persistence;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
+
 
 
 import java.util.ArrayList;
 import java.util.List;
 
-@SpringBootApplication
+@Component
 public class DbSpringAnbindung  {
+
 
     @Autowired
     JdbcTemplate jdbcTemplate;
