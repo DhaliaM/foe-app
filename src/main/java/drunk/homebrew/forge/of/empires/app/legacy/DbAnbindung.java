@@ -1,5 +1,6 @@
-package drunk.homebrew.forge.of.empires.app.persistence;
+package drunk.homebrew.forge.of.empires.app.legacy;
 
+import drunk.homebrew.forge.of.empires.app.persistence.Buildings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

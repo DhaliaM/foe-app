@@ -1,10 +1,10 @@
-package drunk.homebrew.forge.of.empires.app.ui;
+package drunk.homebrew.forge.of.empires.app.legacy;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import drunk.homebrew.forge.of.empires.app.persistence.Buildings;
-import drunk.homebrew.forge.of.empires.app.persistence.DbAnbindung;
 import drunk.homebrew.forge.of.empires.app.service.AuswertungServlet;
+import drunk.homebrew.forge.of.empires.app.ui.BuildingDto;
 
 import javax.naming.NamingException;
 import javax.servlet.ServletException;

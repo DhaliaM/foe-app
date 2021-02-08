@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import drunk.homebrew.forge.of.empires.app.persistence.Buildings;
-import drunk.homebrew.forge.of.empires.app.persistence.DbAnbindung;
+import drunk.homebrew.forge.of.empires.app.legacy.DbAnbindung;
 import drunk.homebrew.forge.of.empires.app.ui.BuildingDto;
 
 
@@ -41,7 +41,7 @@ public class AuswertungServlet {
 
         int id = 0;
 
-        for(BuildingDto dto : input){                                                                               // aus irgendeinem grund hakts wohl ab hier mit dem Index
+        for(BuildingDto dto : input){
             int anzahl = dto.getCount(); //Anzahl des jeweiligen Gebäudes
             int gBonus = dto.getBonus(); //Anzahl des jeweiligen Gebäudes mit Bonus
 

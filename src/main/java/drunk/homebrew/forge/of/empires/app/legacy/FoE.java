@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import drunk.homebrew.forge.of.empires.app.persistence.DbAnbindung;
 import drunk.homebrew.forge.of.empires.app.service.Einsammeln;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
