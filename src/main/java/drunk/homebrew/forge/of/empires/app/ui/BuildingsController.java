@@ -3,6 +3,7 @@ package drunk.homebrew.forge.of.empires.app.ui;
 import drunk.homebrew.forge.of.empires.app.persistence.Buildings;
 import drunk.homebrew.forge.of.empires.app.persistence.DbSpringAnbindung;
 import drunk.homebrew.forge.of.empires.app.service.AuswertungServlet;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.naming.NamingException;
@@ -15,15 +16,18 @@ import java.util.List;
 
 @RestController
 public class BuildingsController {
+    @Autowired
+    DbSpringAnbindung dbAbfrage;
+
+    public static List<Buildings> buildingListe = new ArrayList<Buildings>();
 
     @GetMapping(path = "/EventBuildings")
     public String seitenaufbau() throws Exception {
 
 
-        DbSpringAnbindung dbAbfrage = new DbSpringAnbindung();
 
 
-        List<Buildings> buildingListe = new ArrayList<Buildings>();
+//        List<Buildings> buildingListe = new ArrayList<Buildings>();
 
         InputStreamReader isReader = new InputStreamReader(getClass().getResourceAsStream("/building.html"));
         BufferedReader reader = new BufferedReader(isReader);
@@ -64,15 +68,16 @@ public class BuildingsController {
     }
 
     @PostMapping(path = "/EventBuildings", consumes = "application/json", produces = "application/json")
-    public String auswerten(@RequestBody List<BuildingDto> request) throws SQLException, NamingException {
+    public String auswerten(@RequestBody List<BuildingDto> request) throws Exception {
 
 
         AuswertungServlet auswertung = new AuswertungServlet();
 
+        buildingListe = dbAbfrage.sqlAusgabe();
 
         String ergebnis = new String();
         try {
-            ergebnis = auswertung.auswerten(request);
+            ergebnis = auswertung.auswerten(request,buildingListe);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (

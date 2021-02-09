@@ -4,46 +4,17 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import drunk.homebrew.forge.of.empires.app.persistence.Buildings;
-//import drunk.homebrew.forge.of.empires.app.legacy.DbAnbindung;
+
 import drunk.homebrew.forge.of.empires.app.ui.BuildingDto;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
 
-import javax.naming.NamingException;
-import java.sql.SQLException;
 import java.util.*;
-@SpringBootApplication
+@Component
 public class AuswertungServlet {
 
 
-    JdbcTemplate jdbcTemplate;
-
-    public String auswerten(List <BuildingDto> input) throws SQLException, NamingException {
-
-//        Map<String, Map<String,String>> result = new ObjectMapper().readValue(input, Map.class);
-
-        String sql = "SELECT * FROM Spezialgebäude;";
-        SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql);
-
-//        DbAnbindung dbAbfrage = new DbAnbindung();
-        List<Buildings> buildingListe = new ArrayList<Buildings>();
-
-        while(rowSet.next()){
-            Buildings building = new Buildings();
-            building.setId(rowSet.getInt("Id"));
-            building.setName(rowSet.getString("Name"));
-            building.setForgepoints(rowSet.getInt("Forgepunkte"));
-            building.setGoods(rowSet.getInt("Güter"));
-            building.setProduction(rowSet.getInt("Vorrat"));
-            building.setUnits(rowSet.getInt("Einheiten"));
-            building.setCoins(rowSet.getInt("Münzen"));
-            building.setMedals(rowSet.getInt("Medaillen"));
-            building.setDiamonds(rowSet.getInt("Diamanten"));
-            buildingListe.add(building);
-        }
+    public String auswerten(List <BuildingDto> input, List<Buildings> base) throws Exception {
 
 
         Buildings dailyIncome = new Buildings();
@@ -68,7 +39,7 @@ public class AuswertungServlet {
             for(int current = 0; current < anzahl; current++){
 
                 final boolean isBonusIteration = current < gBonus;
-                dailyIncome = income.einsammeln(buildingListe, id, isBonusIteration);
+                dailyIncome = income.einsammeln(base, id, isBonusIteration);
 
                 dailyGoods = dailyGoods + dailyIncome.getGoods();
                 dailyForgepoints = dailyForgepoints + dailyIncome.getForgepoints();
