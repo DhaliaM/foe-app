@@ -17,8 +17,7 @@ public class Buildings {
 	private int id;
 
 	private List<Loot> loot;
-	
-	
+
 	public int getId(){return id;}
 	public void setId(Integer id) {this.id = id;}
 	public String getName() {
@@ -51,7 +50,6 @@ public class Buildings {
 	public void setMedals(int medals) {
 		this.medals = medals;
 	}
-
 	public int getProduction() {
 		return production;
 	}
@@ -64,6 +62,13 @@ public class Buildings {
 	public void setCoins(int coins) {
 		this.coins = coins;
 	}
+	public int getDiamonds() {
+		return diamonds;
+	}
+	public void setDiamonds(int diamonds) {
+		this.diamonds = diamonds;
+	}
+
 	@Override
 	public String toString() {
 		return "Buildings [id= " + id +" , name=" + name + ",diamonds=" + diamonds + ", forgepoints=" + forgepoints + ", goods=" + goods + ", units=" + units
@@ -75,13 +80,4 @@ public class Buildings {
 	public void setLoot(List<Loot> Loot) {
 		this.loot = Loot;
 	}
-
-	public int getDiamonds() {
-		return diamonds;
-	}
-	public void setDiamonds(int diamonds) {
-		this.diamonds = diamonds;
-	}
-	
-		
 }

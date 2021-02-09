@@ -1,33 +1,22 @@
 package drunk.homebrew.forge.of.empires.app.persistence;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
-
-
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class DbSpringAnbindung  {
 
-
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-
-    public List<Buildings> sqlAusgabe() throws Exception {
-
+    public List<Buildings> sqlAusgabe() {
         List<Buildings> buildingsListe = new ArrayList<Buildings>();
-
         String sql = "SELECT * FROM Spezialgebäude;";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql);
-
-
-
             while(rowSet.next()){
                 Buildings building = new Buildings();
                 building.setId(rowSet.getInt("Id"));
