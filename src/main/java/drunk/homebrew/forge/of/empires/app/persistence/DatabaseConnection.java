@@ -1,3 +1,7 @@
+/**
+ * @(#)DatabaseConnection.java
+ *
+ */
 package drunk.homebrew.forge.of.empires.app.persistence;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,13 +11,19 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Datenbankanbindung über JdbcTemplate
+ * @return eine Liste mit Buildings Objekten, alles aus der Tabelle "Spezialgebäude"
+ * @author Dhalia
+ *
+ */
 @Component
-public class DbSpringAnbindung  {
+public class DatabaseConnection {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public List<Buildings> sqlAusgabe() {
+    public List<Buildings> databaseOutput() {
         List<Buildings> buildingsListe = new ArrayList<Buildings>();
         String sql = "SELECT * FROM Spezialgebäude;";
         SqlRowSet rowSet = jdbcTemplate.queryForRowSet(sql);

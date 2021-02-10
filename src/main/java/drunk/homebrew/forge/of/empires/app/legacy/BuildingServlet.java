@@ -1,3 +1,7 @@
+/**
+ * @(#)BuildingServlet.java
+ *
+ */
 //package drunk.homebrew.forge.of.empires.app.legacy;
 //
 //import com.fasterxml.jackson.core.type.TypeReference;
@@ -5,7 +9,6 @@
 //import drunk.homebrew.forge.of.empires.app.persistence.Buildings;
 //import drunk.homebrew.forge.of.empires.app.service.AuswertungServlet;
 //import drunk.homebrew.forge.of.empires.app.ui.BuildingDto;
-//
 //import javax.naming.NamingException;
 //import javax.servlet.ServletException;
 //import javax.servlet.http.HttpServlet;
@@ -19,7 +22,13 @@
 //import java.util.ArrayList;
 //import java.util.List;
 //
-//
+/**
+ * Legacy Klasse, Servlet, entfällt mit Spring
+ *
+ * @author Dhalia
+ *
+ */
+
 //public class BuildingServlet extends HttpServlet {
 //
 //

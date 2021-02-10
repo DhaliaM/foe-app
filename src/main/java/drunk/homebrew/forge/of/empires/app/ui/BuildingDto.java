@@ -1,6 +1,15 @@
+/**
+ * @(#)BuildingDto.java
+ *
+ */
 package drunk.homebrew.forge.of.empires.app.ui;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+/**
+ * enthält die Attribute des BuildingDto-Objekts
+ * @author L (nein, nicht der Typ aus dem Anime, auch wenn der verschlafene Blick ähnlich ist)
+ */
 
 public class BuildingDto
 {

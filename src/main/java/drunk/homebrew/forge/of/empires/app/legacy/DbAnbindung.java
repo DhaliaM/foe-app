@@ -1,3 +1,7 @@
+/**
+ * @(#)BuildingServlet.java
+ *
+ */
 //package drunk.homebrew.forge.of.empires.app.legacy;
 //
 //import drunk.homebrew.forge.of.empires.app.persistence.Buildings;
@@ -11,7 +15,12 @@
 //import java.sql.*;
 //import java.util.ArrayList;
 //import java.util.List;
-//
+/**
+ * Legacy Klasse, Anbindung einer MariaDB, entfällt mit Spring
+ *
+ * @author Dhalia
+ *
+ */
 //public class DbAnbindung {
 //
 //    private static final Logger LOGGER = LoggerFactory.getLogger(DbAnbindung.class);

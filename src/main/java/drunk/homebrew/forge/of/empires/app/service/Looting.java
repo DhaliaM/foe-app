@@ -1,12 +1,27 @@
+/**
+ * @(#)Looting.java
+ *
+ */
 package drunk.homebrew.forge.of.empires.app.service;
 
 import java.util.List;
 import java.util.Random;
 import drunk.homebrew.forge.of.empires.app.persistence.Buildings;
 
-public class Einsammeln {
+/**
+ * Diese Klasse simuliert das einsammeln von einer Gebäudeproduktion, ggf. mit einem Bonus der Blauen Galaxie.
+ *
+ * @param buildings - Liste vom Typ Buildings, welche Gebäude enthält
+ * @param id - die id, Typ Integer für das entsprechende Gebäude
+ * @param gBonus - Boolean, ob das Gebäude einen Galaxiebonus erhält oder nicht
+ * @return Ergebnis vom Typ Buildings
+ * @author Dhalia
+ *
+ */
 
-    BonusChance bonus = new BonusChance();
+public class Looting {
+
+    GalaxieChance bonus = new GalaxieChance();
     private int forgepoints;
     private int goods;
     private int units;
@@ -15,21 +30,22 @@ public class Einsammeln {
     private int production;
     private int coins;
 
-    Buildings einsammeln(List<Buildings> buildings, Integer id, Boolean gBonus) {
+    Buildings getLoot(List<Buildings> buildings, Integer id, Boolean gBonus) {
         Buildings result = new Buildings();
         int faktor = 1;
         if (gBonus) {
-            //Galaxiechance
+            //Galaxiechance 0.3 entspricht 30%
             if (bonus.chance(0.3)) {
                 faktor = 2;
             }
         }
         Integer counter = 0;
+        //wenn das Gebäude ein Großer Leuchtturm ist, wird ein extra Loot Pool für dieses Gebäude benötigt
         for (Buildings building : buildings) {
             if (building.getName().equals("Grosser Leuchtturm")) {
                 Random rng = new Random();
                 Integer zufallszahl = rng.nextInt(101);
-                result = new BonusPool().poolLeuchtturm(buildings.get(counter), zufallszahl);
+                result = new ExtraLoot().poolLeuchtturm(building, zufallszahl); //übergibt Leuchtturmobjekt
             }
             if (building.getId() == id) {
 

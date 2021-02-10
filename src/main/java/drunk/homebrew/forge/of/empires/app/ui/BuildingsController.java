@@ -1,19 +1,30 @@
+/**
+ * @(#)BuildingsController.java
+ *
+ */
+
 package drunk.homebrew.forge.of.empires.app.ui;
 
 import drunk.homebrew.forge.of.empires.app.persistence.Buildings;
-import drunk.homebrew.forge.of.empires.app.persistence.DbSpringAnbindung;
-import drunk.homebrew.forge.of.empires.app.service.AuswertungServlet;
+import drunk.homebrew.forge.of.empires.app.persistence.DatabaseConnection;
+import drunk.homebrew.forge.of.empires.app.service.EvaluationOfIncome;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * Spring REST Controller für /EventBuildings
+ * baut die Seite über GET auf und schickt die Auswertung über POST in Json zurück
+ *
+ * @author Dhalia
+ *
+ */
 @RestController
 public class BuildingsController {
     @Autowired
-    DbSpringAnbindung dbAbfrage;
+    DatabaseConnection dbAbfrage;
 
     public static List<Buildings> buildingListe = new ArrayList<Buildings>();
 
@@ -25,7 +36,7 @@ public class BuildingsController {
         String str;
         while ((str = reader.readLine()) != null) {
             if (str.contains("<!-- INSERT_HERE -->")) {
-                buildingListe = dbAbfrage.sqlAusgabe();
+                buildingListe = dbAbfrage.databaseOutput();
                 sb.append("<ul>\n");
                 for (Buildings building : buildingListe) {
                     sb.append("<li>\n");
@@ -53,10 +64,10 @@ public class BuildingsController {
 
     @PostMapping(path = "/EventBuildings", consumes = "application/json", produces = "application/json")
     public String auswerten(@RequestBody List<BuildingDto> request) throws Exception {
-        AuswertungServlet auswertung = new AuswertungServlet();
-        buildingListe = dbAbfrage.sqlAusgabe();
+        EvaluationOfIncome auswertung = new EvaluationOfIncome();
+        buildingListe = dbAbfrage.databaseOutput();
         String ergebnis = new String();
-        ergebnis = auswertung.auswerten(request,buildingListe);
+        ergebnis = auswertung.getEvaluation(request,buildingListe);
         return ergebnis;
     }
 }

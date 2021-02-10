@@ -1,5 +1,12 @@
-package drunk.homebrew.forge.of.empires.app.persistence;
-
+/**
+ * @(#)Bonus.java
+ *
+ */
+package drunk.homebrew.forge.of.empires.app.legacy;
+/**
+ * Bonus Objekt, wurde in Legacy: LoadProperties benötigt
+ *
+ */
 public class Bonus {
 	private String name;
 
