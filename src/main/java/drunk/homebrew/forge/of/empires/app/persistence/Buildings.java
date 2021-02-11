@@ -1,18 +1,24 @@
+//Q: Was sind das für Kommentare?
 /**
  * @(#)Buildings.java
  *
  */
 package drunk.homebrew.forge.of.empires.app.persistence;
 
+//FIXME: Unnötige Imports sollten immer entfernt werden
 import java.util.List;
 
 /**
+ * FIXME: Sätze mit großen Buschstaben und mit "." beenden (PS: das mag pingelig klingen, wird aber in Code Reviews oder Tools, die Javadoc prüfen, angemeckert)
  * enthält die Attribute des Buildings-Objekts
  * @author Dhalia
  */
+//FIXME: Unnötige Leerzeilen vermeiden
 
+//FIXME: Klassennamen sind immer im Singular
 public class Buildings {
     private String name;
+    //FIXME: Typo, bitte in CamelCase ändern
     private int forgepoints;
     private int goods;
     private int units;
@@ -34,10 +40,12 @@ public class Buildings {
         this.name = name;
     }
 
+    //FIXME: Typo, bitte in CamelCase ändern
     public int getForgepoints() {
         return forgepoints;
     }
 
+    //FIXME: Typo, bitte in CamelCase ändern
     public void setForgepoints(int forgepoints) {
         this.forgepoints = forgepoints;
     }

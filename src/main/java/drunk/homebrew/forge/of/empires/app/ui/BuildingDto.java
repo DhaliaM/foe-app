@@ -1,3 +1,4 @@
+//Q: Was sind das für Kommentare?
 /**
  * @(#)BuildingDto.java
  *
@@ -10,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * enthält die Attribute des BuildingDto-Objekts
  * @author L (nein, nicht der Typ aus dem Anime, auch wenn der verschlafene Blick ähnlich ist)
  */
-
 public class BuildingDto
 {
     @JsonProperty("id")

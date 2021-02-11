@@ -1,3 +1,4 @@
+//Q: Was sind das für Kommentare?
 /**
  * @(#)FoE.java
  *
@@ -12,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * Hauptklasse zum starten der App
  *
  * @author Dhalia
+ * FIXME: Unnötige Leerzeilen vermeiden
  *
  */
 

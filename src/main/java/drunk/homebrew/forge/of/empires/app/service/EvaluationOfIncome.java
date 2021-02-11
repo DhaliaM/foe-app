@@ -1,3 +1,4 @@
+//Q: Was sind das für Kommentare?
 /**
  * @(#)EvaluationOfIncome.java
  *
@@ -14,15 +15,21 @@ import java.util.*;
 
 /**
  * Auswertung des Einkommens der gewählten Gebäude
+ * FIXME: Ab hier gehört es an die Javadoc der Methode
  * @param input Liste vom Typ BuildingDto welches die gewählten Gebäude enthält und
  * @param base eine Liste vom Typ Buildings, welche die Basiswerte aller Gebäude enthält.
  * @return Json String mit dem Ergebnis
+ * FIXME: bis hier hin
  * @author Dhalia
+ * FIXME: Unnötige Leerzeilen vermeiden
  *
  */
+//FIXME: Unnötige Leerzeilen vermeiden
 
 @Component
 public class EvaluationOfIncome {
+    //FIXME: Javadoc fehlt
+    //FIXME: "get" sollte nur verwendet werden, wenn man den Wert einer Instanzvariable zurückgibt. Bei Berechnungen wäre "calculate" besser.
     public String getEvaluation(List <BuildingDto> input, List<Buildings> base) {
         Buildings dailyIncome;
         Looting income = new Looting();
@@ -61,6 +68,7 @@ public class EvaluationOfIncome {
         ergebnis.put("Medaillen", Integer.toString(dailyMedals));
         ergebnis.put("Diamanten", Integer.toString(dailyDiamonds));
 
+        //FIXME: Mit Spring-Web musst du dich nicht mehr um die Umwandlung in JSON befassen, sondern mit DTO-Klassen arbeiten.
         ObjectMapper mapper = new ObjectMapper();
         mapper.enable(SerializationFeature.INDENT_OUTPUT );
         try {

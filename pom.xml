@@ -14,14 +14,17 @@
 	<name>ForgeOfEmpires</name>
 	<description>Übungsprojekt</description>
 	<properties>
+		<!-- Überflüssig kommt von spring-boot-starter-parent -->
 		<java.version>1.8</java.version>
 	</properties>
   <dependencies>
 	  <dependency>
 		  <groupId>org.springframework.boot</groupId>
 		  <artifactId>spring-boot-starter-thymeleaf</artifactId>
+		  <!-- Überflüssig kommt von spring-boot-starter-parent -->
 		  <version>2.4.2</version>
 	  </dependency>
+	  <!-- START: Überflüssig kommt von spring-boot-starter-web -->
       <dependency>
           <groupId>javax.servlet</groupId>
           <artifactId>javax.servlet-api</artifactId>
@@ -43,9 +46,11 @@
 		  <artifactId>jackson-annotations</artifactId>
 		  <version>2.12.1</version>
 	  </dependency>
+	  <!-- ENDE: Überflüssig kommt von spring-boot-starter-web -->
 	  <dependency>
 		  <groupId>org.mariadb.jdbc</groupId>
 		  <artifactId>mariadb-java-client</artifactId>
+		  <!-- Überflüssig kommt von spring-boot-starter-parent -->
 		  <version>2.7.1</version>
 	  </dependency>
 	  <dependency>
@@ -67,6 +72,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<!-- Überflüssig kommt von spring-boot-starter-parent -->
 				<version>2.4.2</version>
 			</plugin>
 		</plugins>
