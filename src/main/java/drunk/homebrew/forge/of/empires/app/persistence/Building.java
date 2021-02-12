@@ -1,19 +1,13 @@
-/**
- * @(#)Buildings.java
- *
- */
 package drunk.homebrew.forge.of.empires.app.persistence;
 
-import java.util.List;
-
 /**
- * enthält die Attribute des Buildings-Objekts
+ * Enthält die Attribute des Buildings-Objekts.
  * @author Dhalia
  */
 
-public class Buildings {
+public class Building {
     private String name;
-    private int forgepoints;
+    private int forgePoints;
     private int goods;
     private int units;
     private int medals;
@@ -34,12 +28,12 @@ public class Buildings {
         this.name = name;
     }
 
-    public int getForgepoints() {
-        return forgepoints;
+    public int getForgePoints() {
+        return forgePoints;
     }
 
-    public void setForgepoints(int forgepoints) {
-        this.forgepoints = forgepoints;
+    public void setForgePoints(int forgePoints) {
+        this.forgePoints = forgePoints;
     }
 
     public int getGoods() {
@@ -92,7 +86,7 @@ public class Buildings {
 
     @Override
     public String toString() {
-        return "Buildings [id= " + id + " , name=" + name + ",diamonds=" + diamonds + ", forgepoints=" + forgepoints + ", goods=" + goods + ", units=" + units
+        return "Buildings [id= " + id + " , name=" + name + ",diamonds=" + diamonds + ", forgepoints=" + forgePoints + ", goods=" + goods + ", units=" + units
                 + ", medals=" + medals + ", production=" + production + ", coins=" + coins + "]";
     }
 }

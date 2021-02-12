@@ -1,7 +1,3 @@
-/**
- * @(#)FoE.java
- *
- */
 
 package drunk.homebrew.forge.of.empires.app;
 
@@ -10,9 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * Hauptklasse zum starten der App
- *
  * @author Dhalia
- *
  */
 
 @SpringBootApplication

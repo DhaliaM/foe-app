@@ -4,7 +4,7 @@
  */
 package drunk.homebrew.forge.of.empires.app.legacy;
 
-import drunk.homebrew.forge.of.empires.app.persistence.Buildings;
+import drunk.homebrew.forge.of.empires.app.persistence.Building;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,14 +17,14 @@ import java.util.Map;
 
 public class LoadProperties {
 
-	private Map<String, Buildings> buildings = new HashMap<>();
+	private Map<String, Building> buildings = new HashMap<>();
 	private Map<Long, Bonus> bonus = new HashMap<>();
 
-	public Map<String, Buildings> getBuildings() {
+	public Map<String, Building> getBuildings() {
 		return buildings;
 	}
 
-	public void setBuildings(Map<String, Buildings> buildings) {
+	public void setBuildings(Map<String, Building> buildings) {
 		this.buildings = buildings;
 	}
 

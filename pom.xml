@@ -13,40 +13,15 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ForgeOfEmpires</name>
 	<description>Übungsprojekt</description>
-	<properties>
-		<java.version>1.8</java.version>
-	</properties>
   <dependencies>
 	  <dependency>
 		  <groupId>org.springframework.boot</groupId>
 		  <artifactId>spring-boot-starter-thymeleaf</artifactId>
-		  <version>2.4.2</version>
+
 	  </dependency>
-      <dependency>
-          <groupId>javax.servlet</groupId>
-          <artifactId>javax.servlet-api</artifactId>
-          <version>4.0.1</version>
-      </dependency>
-	  <dependency>
-		  <groupId>com.fasterxml.jackson.core</groupId>
-		  <artifactId>jackson-core</artifactId>
-		  <version>2.12.0</version>
-	  </dependency>
-	  <dependency>
-		  <groupId>com.fasterxml.jackson.core</groupId>
-		  <artifactId>jackson-databind</artifactId>
-		  <version>2.12.0</version>
-	  </dependency>
-	  <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
-	  <dependency>
-		  <groupId>com.fasterxml.jackson.core</groupId>
-		  <artifactId>jackson-annotations</artifactId>
-		  <version>2.12.1</version>
-	  </dependency>
-	  <dependency>
+       <dependency>
 		  <groupId>org.mariadb.jdbc</groupId>
 		  <artifactId>mariadb-java-client</artifactId>
-		  <version>2.7.1</version>
 	  </dependency>
 	  <dependency>
 		  <groupId>org.springframework.boot</groupId>
@@ -67,7 +42,6 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<version>2.4.2</version>
 			</plugin>
 		</plugins>
 	</build>

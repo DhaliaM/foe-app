@@ -1,7 +1,3 @@
-/**
- * @(#)BuildingDto.java
- *
- */
 package drunk.homebrew.forge.of.empires.app.ui;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
