@@ -1,16 +1,15 @@
 package drunk.homebrew.forge.of.empires.app.ui;
 
-import drunk.homebrew.forge.of.empires.app.persistence.Building;
-import drunk.homebrew.forge.of.empires.app.persistence.BuildingRepository;
-import drunk.homebrew.forge.of.empires.app.persistence.CalculationDto;
+import drunk.homebrew.forge.of.empires.app.persistence.BuildingEntity;
+import drunk.homebrew.forge.of.empires.app.persistence.HibernateUtil;
 import drunk.homebrew.forge.of.empires.app.service.EvaluationOfIncome;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Ein Spring REST Controller für /EventBuildings.
@@ -21,41 +20,47 @@ import java.util.Objects;
 @RestController
 public class BuildingsController {
 
-    private final BuildingRepository dbQuery;
-
-    public BuildingsController(BuildingRepository dbQuery) {
-        this.dbQuery = Objects.requireNonNull(dbQuery);
-    }
-
-    static List<Building> buildingListe = new ArrayList<>();
-
     @GetMapping(path = "/EventBuildings")
     public String buildWebsite() throws Exception {
         InputStreamReader isReader = new InputStreamReader(getClass().getResourceAsStream("/building.html"));
         BufferedReader reader = new BufferedReader(isReader);
         StringBuilder sb = new StringBuilder();
         String str;
+//        BuildingEntity test = new BuildingEntity("Roflcopter", 10, 0, 0, 5, 2000, 500, 1337);
+
         while ((str = reader.readLine()) != null) {
             if (str.contains("<!-- INSERT_HERE -->")) {
-                buildingListe = dbQuery.loadAllBuildings();
-                sb.append("<ul>\n");
-                for (Building building : buildingListe) {
-                    sb.append("<li>\n");
-                    sb.append("<label>\n");
-                    sb.append(building.getName());
-                    sb.append(" <input type=\"number\" id=\"");
-                    sb.append(building.getId());
-                    sb.append("\" name=\"");
-                    sb.append(building.getName());
-                    sb.append("\" value=\"0\" size=\"1\" /\n>");
-                    sb.append(" Anzahl Galaxiebonus ");
-                    sb.append("<input type =\"number\" id=\"Galaxiebonus.");
-                    sb.append(building.getId());
-                    sb.append("\" value=\"0\" size=\"1\"/>\n");
-                    sb.append("</label>\n");
-                    sb.append("</li>\n");
+                Transaction transaction = null;
+                try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+//                    transaction = session.beginTransaction();
+//                    session.save(test);
+//                    transaction.commit();
+                    List<BuildingEntity> eventBuildings = session.createQuery("from BuildingEntity", BuildingEntity.class).list();
+                    sb.append("<ul>\n");
+                    for (BuildingEntity building : eventBuildings) {
+                        sb.append("<li>\n");
+                        sb.append("<label>\n");
+                        sb.append(building.getName());
+                        sb.append(" <input type=\"number\" id=\"");
+                        sb.append(building.getId());
+                        sb.append("\" name=\"");
+                        sb.append(building.getName());
+                        sb.append("\" value=\"0\" size=\"1\" /\n>");
+                        sb.append(" Anzahl Galaxiebonus ");
+                        sb.append("<input type =\"number\" id=\"Galaxiebonus.");
+                        sb.append(building.getId());
+                        sb.append("\" value=\"0\" size=\"1\"/>\n");
+                        sb.append("</label>\n");
+                        sb.append("</li>\n");
+                    }
+                    sb.append("</ul>\n");
+
+                } catch (Exception e) {
+                    if (transaction != null) {
+                        transaction.rollback();
+                    }
+                    e.printStackTrace();
                 }
-                sb.append("</ul>\n");
             } else {
                 sb.append(str);
                 sb.append("\n");
@@ -67,7 +72,9 @@ public class BuildingsController {
     @PostMapping(path = "/EventBuildings", consumes = "application/json", produces = "application/json")
     public CalculationDto calculateLoot(@RequestBody List<BuildingDto> request) {
         EvaluationOfIncome calculation = new EvaluationOfIncome();
-        buildingListe = dbQuery.loadAllBuildings();
-        return calculation.calculate(request, buildingListe);
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<BuildingEntity> eventBuildings = session.createQuery("from BuildingEntity", BuildingEntity.class).list();
+        return calculation.calculate(request, eventBuildings);
     }
+
 }

@@ -1,6 +1,6 @@
 package drunk.homebrew.forge.of.empires.app.service;
 
-import drunk.homebrew.forge.of.empires.app.persistence.Building;
+import drunk.homebrew.forge.of.empires.app.persistence.BuildingEntity;
 
 /**
  * Diese Klasse enthält einen extra Loot Pool eines Gebäudes.
@@ -14,7 +14,7 @@ class ExtraLoot {
      * @param randomNumber - Zufallszahl
      * @return Ergebnis vom Typ Buildings
      */
-    public Building enrichWithRandomLighthouseLoot(Building poolObject, int randomNumber) {
+    public BuildingEntity enrichWithRandomLighthouseLoot(BuildingEntity poolObject, int randomNumber) {
 
         if (randomNumber > 60) {
             poolObject.setMedals(1900);

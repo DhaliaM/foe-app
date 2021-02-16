@@ -3,7 +3,8 @@ package drunk.homebrew.forge.of.empires.app.service;
 import java.util.List;
 import java.util.Random;
 
-import drunk.homebrew.forge.of.empires.app.persistence.Building;
+
+import drunk.homebrew.forge.of.empires.app.persistence.BuildingEntity;
 
 /**
  * Diese Klasse simuliert das einsammeln von einer Gebäudeproduktion, ggf. mit einem Bonus der Blauen Galaxie.
@@ -20,8 +21,8 @@ class Looting {
      * @param galaxyBonus - Boolean, ob das Gebäude einen Galaxiebonus erhält oder nicht
      * @return Ergebnis vom Typ Buildings
      */
-    Building calculateLoot(List<Building> buildings, int id, boolean galaxyBonus) {
-        Building result = new Building();
+    BuildingEntity calculateLoot(List<BuildingEntity> buildings, int id, boolean galaxyBonus) {
+        BuildingEntity result = new BuildingEntity();
         int forgepoints = 0;
         int goods = 0;
         int units = 0;
@@ -38,7 +39,7 @@ class Looting {
             }
         }
         //wenn das Gebäude ein Großer Leuchtturm ist, wird ein extra Loot Pool für dieses Gebäude benötigt
-        for (Building building : buildings) {
+        for (BuildingEntity building : buildings) {
             if ("Grosser Leuchtturm".equals(building.getName())) {
                 Random random = new Random();
                 int randomNumber = random.nextInt(101);

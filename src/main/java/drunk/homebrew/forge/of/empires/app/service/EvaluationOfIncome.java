@@ -1,7 +1,8 @@
 package drunk.homebrew.forge.of.empires.app.service;
 
 import drunk.homebrew.forge.of.empires.app.persistence.Building;
-import drunk.homebrew.forge.of.empires.app.persistence.CalculationDto;
+import drunk.homebrew.forge.of.empires.app.persistence.BuildingEntity;
+import drunk.homebrew.forge.of.empires.app.ui.CalculationDto;
 import drunk.homebrew.forge.of.empires.app.ui.BuildingDto;
 import org.springframework.stereotype.Component;
 
@@ -21,8 +22,8 @@ public class EvaluationOfIncome {
      * @param base  eine Liste vom Typ Buildings, welche die Basiswerte aller Gebäude enthält.
      * @return Objekt vom Typ CalculationDto
      */
-    public CalculationDto calculate(List<BuildingDto> input, List<Building> base) {
-        Building dailyIncome;
+    public CalculationDto calculate(List<BuildingDto> input, List<BuildingEntity> base) {
+        BuildingEntity dailyIncome;
         Looting income = new Looting();
         int dailyForgepoints = 0;
         int dailyGoods = 0;
