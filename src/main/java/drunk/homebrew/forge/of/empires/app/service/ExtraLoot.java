@@ -14,7 +14,7 @@ class ExtraLoot {
      * @param randomNumber - Zufallszahl
      * @return Ergebnis vom Typ Buildings
      */
-    public BuildingEntity enrichWithRandomLighthouseLoot(BuildingEntity poolObject, int randomNumber) {
+    public void enrichWithRandomLighthouseLoot(BuildingEntity poolObject, int randomNumber) {
 
         if (randomNumber > 60) {
             poolObject.setMedals(1900);
@@ -25,6 +25,5 @@ class ExtraLoot {
         } else {
             poolObject.setDiamonds(25);
         }
-        return poolObject;
     }
 }

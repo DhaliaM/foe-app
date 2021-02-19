@@ -23,7 +23,7 @@ class Looting {
      */
     BuildingEntity calculateLoot(List<BuildingEntity> buildings, int id, boolean galaxyBonus) {
         BuildingEntity result = new BuildingEntity();
-        int forgepoints = 0;
+        int forgePoints = 0;
         int goods = 0;
         int units = 0;
         int medals = 0;
@@ -43,20 +43,20 @@ class Looting {
             if ("Grosser Leuchtturm".equals(building.getName())) {
                 Random random = new Random();
                 int randomNumber = random.nextInt(101);
-                result = new ExtraLoot().enrichWithRandomLighthouseLoot(building, randomNumber); //übergibt Leuchtturmobjekt
+                new ExtraLoot().enrichWithRandomLighthouseLoot(building, randomNumber); //übergibt Leuchtturmobjekt
             }
             if (building.getId() == id) {
                 coins = building.getCoins() * factor;
                 goods = building.getGoods() * factor;
                 units = building.getUnits() * factor;
                 medals = building.getMedals() * factor;
-                forgepoints = building.getForgePoints() * factor;
+                forgePoints = building.getForgePoints() * factor;
                 production = building.getProduction() * factor;
                 diamonds = building.getDiamonds() * factor;
             }
         }
         result.setCoins(coins);
-        result.setForgePoints(forgepoints);
+        result.setForgePoints(forgePoints);
         result.setGoods(goods);
         result.setUnits(units);
         result.setMedals(medals);

@@ -29,7 +29,7 @@ public class BuildingEntity {
     @Column(name = "Name")
     private String name;
 
-    @Column(name = "Forgeppunkte")
+    @Column(name = "Forgepunkte")
     private int forgePoints;
 
     @Column(name = "Güter")
@@ -44,7 +44,7 @@ public class BuildingEntity {
     @Column(name = "Münzen")
     private int coins;
 
-    @Column(name = "Medallien")
+    @Column(name = "Medaillen")
     private int medals;
 
     @Column(name = "Diamanten")

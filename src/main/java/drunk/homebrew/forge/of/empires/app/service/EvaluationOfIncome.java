@@ -1,6 +1,5 @@
 package drunk.homebrew.forge.of.empires.app.service;
 
-import drunk.homebrew.forge.of.empires.app.persistence.Building;
 import drunk.homebrew.forge.of.empires.app.persistence.BuildingEntity;
 import drunk.homebrew.forge.of.empires.app.ui.CalculationDto;
 import drunk.homebrew.forge.of.empires.app.ui.BuildingDto;
@@ -9,7 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.*;
 
 /**
- * Auswertung des Einkommens der gewählten Gebäude
+ * Auswertung des Einkommens der gewählten Gebäude.
  *
  * @author Dhalia
  */
