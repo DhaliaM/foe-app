@@ -6,7 +6,6 @@
     <meta charset="UTF-8" />
     <title>Hier könnte Ihre Werbung stehen!</title>
 <!--    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>-->
-    <title>Titel der Seite | Name der Website</title>
     <style>
         .wrapper { display: grid;grid-template-columns: 40% 60%;gap: 3px;}.input { grid-column-start: 1; grid-column-end: 2; place-self: right; }.output { grid-column-start: 2; grid-column-end: 3; align-content: center; }
     </style>
@@ -19,11 +18,9 @@
                 <li><label th:utext="${building.getName()} "> </label> <input type="number" value="0" id= "" th:attr="id=${building.getId()}" size="1">
                     <label>Galaxiebonus </label> <input type="number" th:id="'Galaxiebonus.' + ${iterCount.count}" value="0" size="1" ></li>
             </ul>
-
-
-            <!-- INSERT_HERE -->
             <input type="Button" id="submitButton" onclick="submitJson()" value="Submit" />
         </form>
+        <input type="button" onclick="window.location.href='/updateBuildings';" value="Gebäudeliste ändern" />
     </div>
 
     <div id="output" class="output">Ausgabe</div>

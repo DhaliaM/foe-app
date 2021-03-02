@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<style type="text/css">
+    .tg {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    .tg td {
+        border-color: black;
+        border-style: solid;
+        border-width: 1px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        overflow: hidden;
+        padding: 10px 5px;
+        word-break: normal;
+    }
+
+    .tg th {
+        border-color: black;
+        border-style: solid;
+        border-width: 1px;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+        font-weight: normal;
+        overflow: hidden;
+        padding: 10px 5px;
+        word-break: normal;
+    }
+
+    .tg .tg-0lax {
+        text-align: left;
+        vertical-align: top
+    }
+</style>
+<table class="tg">
+    <thead>
+    <tr>
+        <th class="tg-0lax">Gebäudename</th>
+        <th class="tg-0lax">Forgepunkte</th>
+        <th class="tg-0lax">Münzen</th>
+        <th class="tg-0lax">Vorrat</th>
+        <th class="tg-0lax">Güter</th>
+        <th class="tg-0lax">Medaillen</th>
+        <th class="tg-0lax">Einheiten</th>
+        <th class="tg-0lax">Diamanten</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each=" building, iterCount : ${eventBuildings}">
+        <td th:utext="${building.getName()}" class="tg-0lax"></td>
+        <td th:utext="${building.getForgePoints()}" class="tg-0lax"></td>
+        <td th:utext="${building.getCoins()}" class="tg-0lax"></td>
+        <td th:utext="${building.getProduction()} " class="tg-0lax"></td>
+        <td th:utext="${building.getGoods()} " class="tg-0lax"></td>
+        <td th:utext="${building.getMedals()}" class="tg-0lax"></td>
+        <td th:utext="${building.getUnits()}" class="tg-0lax"></td>
+        <td th:utext="${building.getDiamonds()}" class="tg-0lax"></td>
+    </tr>
+    </tbody>
+</table>
+<form action="#" th:action="@{/updateBuildings}" th:object="${addBuilding}" method="post">
+    <p><label>building name</label> <input type="text" th:field="*{name}">
+    <label>forgepoints </label> <input type="number" th:field="*{forgePoints}" value="0" size="1">
+    <label>goods </label> <input type="number" th:field="*{goods}" value="0" size="1">
+    <label>coins </label> <input type="number" th:field="*{coins}" value="0" size="1">
+    <label>units </label> <input type="number" th:field="*{units}" value="0" size="1">
+    <label>medals </label> <input type="number" th:field="*{medals}" value="0" size="1">
+    <label>production </label> <input type="number" th:field="*{production}" value="0" size="1">
+    <label>diamonds </label> <input type="number" th:field="*{diamonds}" value="0" size="1">
+    </p>
+    <p><input type="submit" value="Submit"></p>
+
+</form>
+</body>
+</html>

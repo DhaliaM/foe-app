@@ -22,13 +22,13 @@ import java.util.List;
 @Controller
 public class BuildingsController {
 
-    @RequestMapping(value = { "/", "/index" }, method = RequestMethod.GET)
+    @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
         return "index";
     }
 
-    @RequestMapping(value="/building",method = RequestMethod.GET)
-    public String building(Model model){
+    @RequestMapping(value = "/building", method = RequestMethod.GET)
+    public String building(Model model) {
 
         List<BuildingEntity> eventBuildings = new ArrayList<>();
 
@@ -46,62 +46,48 @@ public class BuildingsController {
         return "building";
     }
 
+    @RequestMapping(value = "/updateBuildings", method = RequestMethod.GET)
+    public String updateBuilding(Model model) {
 
-//    @GetMapping(path = "/EventBuildings")
-//    public String buildWebsite() throws Exception {
-////        InputStreamReader isReader = new InputStreamReader(getClass().getResourceAsStream("/building.html"));
-////        BufferedReader reader = new BufferedReader(isReader);
-////        StringBuilder sb = new StringBuilder();
-////        String str;
-////        BuildingEntity test = new BuildingEntity("Roflcopter", 10, 0, 0, 5, 2000, 500, 1337);
-//        List<BuildingEntity> eventBuildings = new ArrayList<>();
-////        while ((str = reader.readLine()) != null) {
-////            if (str.contains("<!-- INSERT_HERE -->")) {
-////                Transaction transaction = null;
-////                try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-//////                    transaction = session.beginTransaction();
-//////                    session.save(test);
-//////                    transaction.commit();
-////                    List<BuildingEntity> eventBuildings = session.createQuery("from BuildingEntity", BuildingEntity.class).list();
-////                    sb.append("<ul>\n");
-////                    for (BuildingEntity building : eventBuildings) {
-////                        sb.append("<li>\n");
-////                        sb.append("<label>\n");
-////                        sb.append(building.getName());
-////                        sb.append(" <input type=\"number\" id=\"");
-////                        sb.append(building.getId());
-////                        sb.append("\" name=\"");
-////                        sb.append(building.getName());
-////                        sb.append("\" value=\"0\" size=\"1\" /\n>");
-////                        sb.append(" Anzahl Galaxiebonus ");
-////                        sb.append("<input type =\"number\" id=\"Galaxiebonus.");
-////                        sb.append(building.getId());
-////                        sb.append("\" value=\"0\" size=\"1\"/>\n");
-////                        sb.append("</label>\n");
-////                        sb.append("</li>\n");
-////                    }
-////                    sb.append("</ul>\n");
-////
-//                } catch (Exception e) {
-//                    if (transaction != null) {
-//                        transaction.rollback();
-//                    }
-//                    e.printStackTrace();
-//                }
-////            } else {
-////                sb.append(str);
-////                sb.append("\n");
-////            }
-////        }
-//        return sb.toString();
-//    }
+        List<BuildingEntity> eventBuildings = new ArrayList<>();
+        BuildingEntity addBuilding = new BuildingEntity();
 
-//    @PostMapping(path = "/building", consumes = "application/json", produces = "application/json")
-    @RequestMapping(value="/building",method = RequestMethod.POST)
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            eventBuildings = session.createQuery("from BuildingEntity", BuildingEntity.class).list();
+            session.close();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+        model.addAttribute("eventBuildings", eventBuildings);
+        model.addAttribute("addBuilding", addBuilding);
+        return "updateBuildings";
+    }
+
+    @RequestMapping(value = "/updateBuildings", method = RequestMethod.POST)
+    public String addBuilding(@ModelAttribute BuildingEntity addBuilding, Model model) {
+        model.addAttribute("addBuilding", addBuilding);
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction();
+        session.save(addBuilding);
+        session.getTransaction().commit();
+        session.close();
+
+        return "redirect:/updateBuildings";
+
+    }
+
+    @RequestMapping(value = "/building", method = RequestMethod.POST)
+    @ResponseBody
     public CalculationDto calculateLoot(@RequestBody List<BuildingDto> request) {
         EvaluationOfIncome calculation = new EvaluationOfIncome();
         Session session = HibernateUtil.getSessionFactory().openSession();
         List<BuildingEntity> eventBuildings = session.createQuery("from BuildingEntity", BuildingEntity.class).list();
+        session.close();
         return calculation.calculate(request, eventBuildings);
     }
 
