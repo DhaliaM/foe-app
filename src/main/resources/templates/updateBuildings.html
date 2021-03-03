@@ -50,6 +50,7 @@
         <th class="tg-0lax">Medaillen</th>
         <th class="tg-0lax">Einheiten</th>
         <th class="tg-0lax">Diamanten</th>
+        <th class="tg-0lax">Löschen</th>
     </tr>
     </thead>
     <tbody>
@@ -62,10 +63,12 @@
         <td th:utext="${building.getMedals()}" class="tg-0lax"></td>
         <td th:utext="${building.getUnits()}" class="tg-0lax"></td>
         <td th:utext="${building.getDiamonds()}" class="tg-0lax"></td>
+        <td class="tg-0lax"><input type="checkbox" th:checked="${toDeleted}"/></td>
     </tr>
     </tbody>
 </table>
 <form action="#" th:action="@{/updateBuildings}" th:object="${addBuilding}" method="post">
+    <p><label>Gebäude hinzufügen,bearbeiten(genauer Gebäudename) oder löschen</label></p>
     <p><label>building name</label> <input type="text" th:field="*{name}">
     <label>forgepoints </label> <input type="number" th:field="*{forgePoints}" value="0" size="1">
     <label>goods </label> <input type="number" th:field="*{goods}" value="0" size="1">

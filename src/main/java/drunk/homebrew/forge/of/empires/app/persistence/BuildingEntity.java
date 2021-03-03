@@ -10,7 +10,7 @@ public class BuildingEntity {
 
     }
 
-    public BuildingEntity(String name, int forgePoints, int goods, int production, int units, int coins, int medals, int diamonds) {
+    public BuildingEntity(String name, int forgePoints, int goods, int production, int units, int coins, int medals, int diamonds, boolean toDeleted) {
         this.name = name;
         this.forgePoints = forgePoints;
         this.goods = goods;
@@ -19,6 +19,7 @@ public class BuildingEntity {
         this.coins = coins;
         this.medals = medals;
         this.diamonds = diamonds;
+        this.toDeleted = toDeleted;
     }
 
     @Id
@@ -49,6 +50,17 @@ public class BuildingEntity {
 
     @Column(name = "Diamanten")
     private int diamonds;
+
+    @Transient
+    private boolean toDeleted;
+
+    public boolean getToDeleted() {
+        return toDeleted;
+    }
+
+    public void setToDeleted(boolean toDeleted) {
+        this.toDeleted = toDeleted;
+    }
 
     public int getId() {
         return id;
@@ -121,6 +133,5 @@ public class BuildingEntity {
     public void setDiamonds(int diamonds) {
         this.diamonds = diamonds;
     }
-
 
 }

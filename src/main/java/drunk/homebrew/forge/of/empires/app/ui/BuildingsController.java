@@ -5,7 +5,6 @@ import drunk.homebrew.forge.of.empires.app.persistence.HibernateUtil;
 import drunk.homebrew.forge.of.empires.app.service.EvaluationOfIncome;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -51,6 +50,7 @@ public class BuildingsController {
 
         List<BuildingEntity> eventBuildings = new ArrayList<>();
         BuildingEntity addBuilding = new BuildingEntity();
+        Boolean toDeleted = new Boolean(false);
 
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -64,21 +64,23 @@ public class BuildingsController {
         }
         model.addAttribute("eventBuildings", eventBuildings);
         model.addAttribute("addBuilding", addBuilding);
+        model.addAttribute("toDeleted", toDeleted);
         return "updateBuildings";
     }
 
     @RequestMapping(value = "/updateBuildings", method = RequestMethod.POST)
-    public String addBuilding(@ModelAttribute BuildingEntity addBuilding, Model model) {
-        model.addAttribute("addBuilding", addBuilding);
+    public String addBuilding(@ModelAttribute Boolean toDeleted, BuildingEntity addBuilding, Model model) {
 
+        model.addAttribute("addBuilding", addBuilding);
+        model.addAttribute("toDeleted", toDeleted);
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         session.save(addBuilding);
         session.getTransaction().commit();
         session.close();
 
-        return "redirect:/updateBuildings";
-
+//        return "redirect:/updateBuildings";
+        return addBuilding.toString();
     }
 
     @RequestMapping(value = "/building", method = RequestMethod.POST)
