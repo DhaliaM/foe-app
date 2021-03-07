@@ -39,6 +39,7 @@
         vertical-align: top
     }
 </style>
+<form action="#" th:action="@{/updateBuildings}" th:object="${addBuilding}" method="post">
 <table class="tg">
     <thead>
     <tr>
@@ -63,11 +64,10 @@
         <td th:utext="${building.getMedals()}" class="tg-0lax"></td>
         <td th:utext="${building.getUnits()}" class="tg-0lax"></td>
         <td th:utext="${building.getDiamonds()}" class="tg-0lax"></td>
-        <td class="tg-0lax"><input type="checkbox" th:checked="${toDeleted}"/></td>
+        <td class="tg-0lax"><input type="checkbox" th:value="${building.getId()}" th:field="*{deletedIds}"/></td>
     </tr>
     </tbody>
 </table>
-<form action="#" th:action="@{/updateBuildings}" th:object="${addBuilding}" method="post">
     <p><label>Gebäude hinzufügen,bearbeiten(genauer Gebäudename) oder löschen</label></p>
     <p><label>building name</label> <input type="text" th:field="*{name}">
     <label>forgepoints </label> <input type="number" th:field="*{forgePoints}" value="0" size="1">

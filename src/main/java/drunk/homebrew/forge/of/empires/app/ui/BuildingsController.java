@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +51,6 @@ public class BuildingsController {
 
         List<BuildingEntity> eventBuildings = new ArrayList<>();
         BuildingEntity addBuilding = new BuildingEntity();
-        Boolean toDeleted = new Boolean(false);
 
         Transaction transaction = null;
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
@@ -64,23 +64,32 @@ public class BuildingsController {
         }
         model.addAttribute("eventBuildings", eventBuildings);
         model.addAttribute("addBuilding", addBuilding);
-        model.addAttribute("toDeleted", toDeleted);
         return "updateBuildings";
     }
 
     @RequestMapping(value = "/updateBuildings", method = RequestMethod.POST)
-    public String addBuilding(@ModelAttribute Boolean toDeleted, BuildingEntity addBuilding, Model model) {
+    public String addBuilding(@ModelAttribute BuildingEntity addBuilding, Model model) {
 
         model.addAttribute("addBuilding", addBuilding);
-        model.addAttribute("toDeleted", toDeleted);
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
-        session.save(addBuilding);
-        session.getTransaction().commit();
-        session.close();
-
-//        return "redirect:/updateBuildings";
-        return addBuilding.toString();
+        if(addBuilding.getName() != "") {
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            session.save(addBuilding);
+            session.getTransaction().commit();
+            session.close();
+        }
+        if(addBuilding.getDeletedIds() != null){
+            Session session = HibernateUtil.getSessionFactory().openSession();
+            session.beginTransaction();
+            for (Integer id : addBuilding.getDeletedIds() ) {
+                BuildingEntity building = new BuildingEntity();
+                building.setId(id);
+                session.delete(building);
+            }
+            session.getTransaction().commit();
+            session.close();
+        }
+        return "redirect:/updateBuildings";
     }
 
     @RequestMapping(value = "/building", method = RequestMethod.POST)

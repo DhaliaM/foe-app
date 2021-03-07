@@ -2,6 +2,9 @@ package drunk.homebrew.forge.of.empires.app.persistence;
 
 import javax.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Table(name = "Spezialgebäude")
 public class BuildingEntity {
@@ -51,16 +54,30 @@ public class BuildingEntity {
     @Column(name = "Diamanten")
     private int diamonds;
 
-    @Transient
-    private boolean toDeleted;
-
-    public boolean getToDeleted() {
+    public boolean isToDeleted() {
         return toDeleted;
     }
 
     public void setToDeleted(boolean toDeleted) {
         this.toDeleted = toDeleted;
     }
+
+    public BuildingEntity(boolean toDeleted) {
+        this.toDeleted = toDeleted;
+    }
+
+    @Transient
+    private boolean toDeleted;
+
+    public List<Integer> getDeletedIds() {
+        return  deletedIds;
+    }
+
+    public void setDeletedIds(List<Integer> deletedIds) {
+        this.deletedIds = deletedIds;
+    }
+    @Transient
+    List<Integer> deletedIds = new ArrayList<>();
 
     public int getId() {
         return id;
