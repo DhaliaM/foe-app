@@ -38,8 +38,47 @@
         text-align: left;
         vertical-align: top
     }
+
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content/Box */
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+    }
+
+    /* The Close Button */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
 </style>
-<form action="#" th:action="@{/updateBuildings}" th:object="${addBuilding}" method="post">
+<!--<form action="#" th:action="@{/updateBuildings}" th:object="${addBuilding}" method="post">-->
 <table class="tg">
     <thead>
     <tr>
@@ -54,7 +93,7 @@
         <th class="tg-0lax">Löschen</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody th:object="${addBuilding}">
     <tr th:each=" building, iterCount : ${eventBuildings}">
         <td th:utext="${building.getName()}" class="tg-0lax"></td>
         <td th:utext="${building.getForgePoints()}" class="tg-0lax"></td>
@@ -65,21 +104,103 @@
         <td th:utext="${building.getUnits()}" class="tg-0lax"></td>
         <td th:utext="${building.getDiamonds()}" class="tg-0lax"></td>
         <td class="tg-0lax"><input type="checkbox" th:value="${building.getId()}" th:field="*{deletedIds}"/></td>
-    </tr>
+        <td>
+            <button th:attr="id=${building.getId()}" onclick="openModal(this.id)">bearbeiten</button>
+        </td>
+
     </tbody>
 </table>
-    <p><label>Gebäude hinzufügen,bearbeiten(genauer Gebäudename) oder löschen</label></p>
+
+<form action="#" th:action="@{/updateBuildings}" th:object="${addBuilding}" method="post">
+    <p><label>Gebäude hinzufügen oder löschen</label></p>
     <p><label>building name</label> <input type="text" th:field="*{name}">
-    <label>forgepoints </label> <input type="number" th:field="*{forgePoints}" value="0" size="1">
-    <label>goods </label> <input type="number" th:field="*{goods}" value="0" size="1">
-    <label>coins </label> <input type="number" th:field="*{coins}" value="0" size="1">
-    <label>units </label> <input type="number" th:field="*{units}" value="0" size="1">
-    <label>medals </label> <input type="number" th:field="*{medals}" value="0" size="1">
-    <label>production </label> <input type="number" th:field="*{production}" value="0" size="1">
-    <label>diamonds </label> <input type="number" th:field="*{diamonds}" value="0" size="1">
+        <label>forgepoints </label> <input type="number" th:field="*{forgePoints}" value="0" size="1">
+        <label>goods </label> <input type="number" th:field="*{goods}" value="0" size="1">
+        <label>coins </label> <input type="number" th:field="*{coins}" value="0" size="1">
+        <label>units </label> <input type="number" th:field="*{units}" value="0" size="1">
+        <label>medals </label> <input type="number" th:field="*{medals}" value="0" size="1">
+        <label>production </label> <input type="number" th:field="*{production}" value="0" size="1">
+        <label>diamonds </label> <input type="number" th:field="*{diamonds}" value="0" size="1">
     </p>
     <p><input type="submit" value="Submit"></p>
 
 </form>
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+        <form action="#" th:action="@{/updateBuildings}" th:object="${editBuilding}" method="post">
+            <span class="close">&times;</span>
+            <p>Some text in the Modal..</p>
+            <p><label>building name</label> <input type="text" id="modalBuildingName" th:field="*{name}"><input
+                    type="hidden" id="modalId" th:field="*{id}"></p>
+            <p><label>forgepoints </label> <input id="modalForgePoints" type="number" th:field="*{forgePoints}" value=""
+                                                  size="1"></p>
+            <p><label>goods </label> <input type="number" id="modalGoods" th:field="*{goods}" value="0" size="2"></p>
+            <p><label>coins </label> <input type="number" id="modalCoins" th:field="*{coins}" value="0" size="3"></p>
+            <p><label>units </label> <input type="number" id="modalUnits" th:field="*{units}" value="0" size="1"></p>
+            <p><label>medals </label> <input type="number" id="modalMedals" th:field="*{medals}" value="0" size="3"></p>
+            <p><label>production </label> <input type="number" id="modalProduction" th:field="*{production}" value="0"
+                                                 size="3"></p>
+            <p><label>diamonds </label> <input type="number" id="modalDiamonds" th:field="*{diamonds}" value="0"
+                                               size="1"></p>
+            <p><input type="submit" value="Submit"></p>
+        </form>
+    </div>
+
+</div>
 </body>
+<script th:inline="javascript">
+
+    var eventBuilding = [[${eventBuildings}]];
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks on the button, open the modal
+    function openModal(id) {
+        modal.style.display = "block";
+
+        let targetId = parseInt(id);
+        let index = eventBuilding.map(function (item) {
+            return item.id;
+        }).indexOf(targetId);
+
+        let targetBuilding = document.querySelector("#modalBuildingName")
+        targetBuilding.value = eventBuilding[index].name;
+        targetBuilding = document.querySelector("#modalForgePoints")
+        targetBuilding.value = eventBuilding[index].forgePoints;
+        targetBuilding = document.querySelector("#modalGoods")
+        targetBuilding.value = eventBuilding[index].goods;
+        targetBuilding = document.querySelector("#modalCoins")
+        targetBuilding.value = eventBuilding[index].coins;
+        targetBuilding = document.querySelector("#modalMedals")
+        targetBuilding.value = eventBuilding[index].medals;
+        targetBuilding = document.querySelector("#modalUnits")
+        targetBuilding.value = eventBuilding[index].units;
+        targetBuilding = document.querySelector("#modalProduction")
+        targetBuilding.value = eventBuilding[index].production;
+        targetBuilding = document.querySelector("#modalDiamonds")
+        targetBuilding.value = eventBuilding[index].diamonds;
+        targetBuilding = document.querySelector("#modalId")
+        targetBuilding.value = eventBuilding[index].id;
+
+
+    }
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function (id) {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+</script>
 </html>

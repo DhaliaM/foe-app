@@ -1,16 +1,12 @@
 package drunk.homebrew.forge.of.empires.app.ui;
 
 import drunk.homebrew.forge.of.empires.app.persistence.BuildingEntity;
-import drunk.homebrew.forge.of.empires.app.persistence.HibernateUtil;
+import drunk.homebrew.forge.of.empires.app.service.BuildingService;
 import drunk.homebrew.forge.of.empires.app.service.EvaluationOfIncome;
-import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,6 +17,11 @@ import java.util.List;
  */
 @Controller
 public class BuildingsController {
+    private BuildingService buildingService;
+
+    public BuildingsController(BuildingService buildingService) {
+        this.buildingService = buildingService;
+    }
 
     @RequestMapping(value = {"/", "/index"}, method = RequestMethod.GET)
     public String index(Model model) {
@@ -30,18 +31,8 @@ public class BuildingsController {
     @RequestMapping(value = "/building", method = RequestMethod.GET)
     public String building(Model model) {
 
-        List<BuildingEntity> eventBuildings = new ArrayList<>();
-
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            eventBuildings = session.createQuery("from BuildingEntity", BuildingEntity.class).list();
-            session.close();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
+        List<BuildingEntity> eventBuildings;
+        eventBuildings = buildingService.findAll();
         model.addAttribute("eventBuildings", eventBuildings);
         return "building";
     }
@@ -49,45 +40,38 @@ public class BuildingsController {
     @RequestMapping(value = "/updateBuildings", method = RequestMethod.GET)
     public String updateBuilding(Model model) {
 
-        List<BuildingEntity> eventBuildings = new ArrayList<>();
+        List<BuildingEntity> eventBuildings;
         BuildingEntity addBuilding = new BuildingEntity();
+        BuildingEntity editBuilding = new BuildingEntity();
+        eventBuildings = buildingService.findAll();
 
-        Transaction transaction = null;
-        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            eventBuildings = session.createQuery("from BuildingEntity", BuildingEntity.class).list();
-            session.close();
-        } catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
-            e.printStackTrace();
-        }
         model.addAttribute("eventBuildings", eventBuildings);
         model.addAttribute("addBuilding", addBuilding);
+        model.addAttribute("editBuilding", editBuilding);
         return "updateBuildings";
     }
 
+    @RequestMapping(value = "/updateBuildings", method = RequestMethod.PUT)
+    public String editBuilding(Model model){
+        BuildingEntity editBuilding = new BuildingEntity();
+
+        model.addAttribute("editBuilding", editBuilding);
+        buildingService.save(editBuilding);
+        return "updateBuildings";
+    }
     @RequestMapping(value = "/updateBuildings", method = RequestMethod.POST)
     public String addBuilding(@ModelAttribute BuildingEntity addBuilding, Model model) {
 
         model.addAttribute("addBuilding", addBuilding);
-        if(addBuilding.getName() != "") {
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            session.save(addBuilding);
-            session.getTransaction().commit();
-            session.close();
+        if (addBuilding.getName() != "") {
+            buildingService.save(addBuilding);
         }
-        if(addBuilding.getDeletedIds() != null){
-            Session session = HibernateUtil.getSessionFactory().openSession();
-            session.beginTransaction();
-            for (Integer id : addBuilding.getDeletedIds() ) {
+        if (addBuilding.getDeletedIds() != null) {
+            for (Integer id : addBuilding.getDeletedIds()) {
                 BuildingEntity building = new BuildingEntity();
                 building.setId(id);
-                session.delete(building);
+                buildingService.delete(building);
             }
-            session.getTransaction().commit();
-            session.close();
         }
         return "redirect:/updateBuildings";
     }
@@ -96,9 +80,8 @@ public class BuildingsController {
     @ResponseBody
     public CalculationDto calculateLoot(@RequestBody List<BuildingDto> request) {
         EvaluationOfIncome calculation = new EvaluationOfIncome();
-        Session session = HibernateUtil.getSessionFactory().openSession();
-        List<BuildingEntity> eventBuildings = session.createQuery("from BuildingEntity", BuildingEntity.class).list();
-        session.close();
+        List<BuildingEntity> eventBuildings;
+        eventBuildings = buildingService.findAll();
         return calculation.calculate(request, eventBuildings);
     }
 
