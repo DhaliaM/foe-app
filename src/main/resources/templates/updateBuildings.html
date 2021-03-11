@@ -123,8 +123,10 @@
         <label>diamonds </label> <input type="number" th:field="*{diamonds}" value="0" size="1">
     </p>
     <p><input type="submit" value="Submit"></p>
-
 </form>
+    <p><button type="button" onclick="deleteBuilding()">löschen</button> </p>
+
+
 <div id="myModal" class="modal">
 
     <!-- Modal content -->
@@ -151,6 +153,28 @@
 </div>
 </body>
 <script th:inline="javascript">
+
+    function deleteBuilding(){
+        const checkboxes = document.querySelectorAll('input[name="deletedIds"]:checked');
+        let idsToDelete = [];
+        checkboxes.forEach((checkbox) => {
+            idsToDelete.push(checkbox.value);
+        });
+
+        var dataJson = JSON.stringify(idsToDelete);
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                console.log(this.responseText);
+            }
+        };
+
+        xhr.open("DELETE", "updateBuildings", true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(dataJson);
+
+    }
+
 
     var eventBuilding = [[${eventBuildings}]];
     // Get the modal
@@ -186,8 +210,6 @@
         targetBuilding.value = eventBuilding[index].diamonds;
         targetBuilding = document.querySelector("#modalId")
         targetBuilding.value = eventBuilding[index].id;
-
-
     }
 
     // When the user clicks on <span> (x), close the modal

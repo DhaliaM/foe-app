@@ -52,13 +52,14 @@ public class BuildingsController {
     }
 
     @RequestMapping(value = "/updateBuildings", method = RequestMethod.PUT)
-    public String editBuilding(Model model){
+    public String editBuilding(Model model) {
         BuildingEntity editBuilding = new BuildingEntity();
 
         model.addAttribute("editBuilding", editBuilding);
         buildingService.save(editBuilding);
-        return "updateBuildings";
+        return "redirect:/updateBuildings";
     }
+
     @RequestMapping(value = "/updateBuildings", method = RequestMethod.POST)
     public String addBuilding(@ModelAttribute BuildingEntity addBuilding, Model model) {
 
@@ -73,6 +74,17 @@ public class BuildingsController {
                 buildingService.delete(building);
             }
         }
+        return "redirect:/updateBuildings";
+    }
+
+    @RequestMapping(value = "/updateBuildings", method = RequestMethod.DELETE)
+    public String deleteBuilding(@RequestBody List<Integer> idsToDelete) {
+
+        idsToDelete.forEach(id->{
+            BuildingEntity building = new BuildingEntity();
+            building.setId(id);
+            buildingService.delete(building);
+        });
         return "redirect:/updateBuildings";
     }
 
