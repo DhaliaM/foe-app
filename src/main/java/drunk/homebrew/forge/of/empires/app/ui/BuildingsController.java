@@ -67,25 +67,23 @@ public class BuildingsController {
         if (addBuilding.getName() != "") {
             buildingService.save(addBuilding);
         }
-        if (addBuilding.getDeletedIds() != null) {
-            for (Integer id : addBuilding.getDeletedIds()) {
-                BuildingEntity building = new BuildingEntity();
-                building.setId(id);
-                buildingService.delete(building);
-            }
-        }
+
         return "redirect:/updateBuildings";
     }
 
     @RequestMapping(value = "/updateBuildings", method = RequestMethod.DELETE)
-    public String deleteBuilding(@RequestBody List<Integer> idsToDelete) {
+    public void deleteBuilding(@RequestBody List<Integer> idsToDelete, Model model) {
 
         idsToDelete.forEach(id->{
             BuildingEntity building = new BuildingEntity();
             building.setId(id);
             buildingService.delete(building);
         });
-        return "redirect:/updateBuildings";
+
+        model.addAttribute("eventBuildings", buildingService.findAll());
+        model.addAttribute("addBuilding", new BuildingEntity());
+        model.addAttribute("editBuilding", new BuildingEntity());
+
     }
 
     @RequestMapping(value = "/building", method = RequestMethod.POST)
