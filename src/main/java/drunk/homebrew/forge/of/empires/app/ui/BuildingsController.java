@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Controller
 public class BuildingsController {
-    private BuildingService buildingService;
+    final BuildingService buildingService;
 
     public BuildingsController(BuildingService buildingService) {
         this.buildingService = buildingService;

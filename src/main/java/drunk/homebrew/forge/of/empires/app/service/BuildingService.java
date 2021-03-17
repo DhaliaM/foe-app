@@ -7,7 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+/**
+ * Service um Daten in BuildingJpaRepository/der Datenbank zu ändern
+ * @author Dhalia
+ */
 @Service
 public class BuildingService {
     private static final Logger LOGGER = LoggerFactory.getLogger(BuildingService.class);

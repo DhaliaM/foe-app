@@ -4,25 +4,28 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-
+/**
+* Die Klasse zum einstellen von Spring Security.
+ * @author internetz
+ */
 @Configuration
-@EnableWebSecurity // (1)
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter { // (1)
+@EnableWebSecurity
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {  // (2)
+    protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/", "/index","/building","/eventBuilding").permitAll() // (3)
-                .anyRequest().authenticated() // (4)
+                .antMatchers("/", "/index","/building","/eventBuilding").permitAll()
+                .anyRequest().authenticated()
                 .and()
-                .formLogin() // (5)
-//                .loginPage("/login") // (5)
+                .formLogin()
                 .permitAll()
                 .and()
-                .logout() // (6)
+                .logout()
                 .permitAll()
                 .and()
-                .httpBasic(); // (7)
+                .csrf().disable()
+                .httpBasic();
     }
 }

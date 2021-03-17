@@ -16,7 +16,7 @@
         <form action="EventBuildings" name="buildings" id="buildings">
             <ul th:each = "building, iterCount : ${eventBuildings}">
                 <li><label th:utext="${building.getName()} "> </label> <input type="number" value="0" id= "" th:attr="id=${building.getId()}" size="1">
-                    <label>Galaxiebonus </label> <input type="number" th:id="'Galaxiebonus.' + ${iterCount.count}" value="0" size="1" ></li>
+                    <label>Galaxiebonus </label> <input type="number" th:id="'Galaxiebonus.' + ${building.getId()}" value="0" size="1" ></li>
             </ul>
             <input type="Button" id="submitButton" onclick="submitJson()" value="Submit" />
         </form>
