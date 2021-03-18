@@ -30,6 +30,10 @@ public class BuildingsController {
 
     @RequestMapping(value = "/building", method = RequestMethod.GET)
     public String building(Model model) {
+//        UserEntity user = new UserEntity();
+//        user.setUserName("admin");
+//        user.setPassword(BCrypt.hashpw("roflcopter", BCrypt.gensalt()));
+//        userService.save(user);
 
         List<BuildingEntity> eventBuildings;
         eventBuildings = buildingService.findAll();
