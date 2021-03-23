@@ -1,8 +1,8 @@
-package coffee.homebrew.forge.of.empires.app.service;
+package drunk.homebrew.forge.of.empires.app.service;
 
-import coffee.homebrew.forge.of.empires.app.persistence.BuildingEntity;
-import coffee.homebrew.forge.of.empires.app.ui.CalculationDto;
-import coffee.homebrew.forge.of.empires.app.ui.BuildingDto;
+import drunk.homebrew.forge.of.empires.app.persistence.BuildingEntity;
+import drunk.homebrew.forge.of.empires.app.ui.CalculationDto;
+import drunk.homebrew.forge.of.empires.app.ui.BuildingDto;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -17,13 +17,12 @@ import java.util.*;
 public class EvaluationOfIncome {
 
     /**
-     * Eine Methode, welche die tägliche Ausbeute der gewählten Gebäude berechnet.
-     *
+     * TODO: allgemeine Methodenbeschreibung fehlt
      * @param input Liste vom Typ BuildingDto welches die gewählten Gebäude enthält und
      * @param base  eine Liste vom Typ Buildings, welche die Basiswerte aller Gebäude enthält.
      * @return Objekt vom Typ CalculationDto
      */
-    public CalculationDto calculate(List<BuildingDto> input, List<BuildingEntity> base) {
+        public CalculationDto calculate(List<BuildingDto> input, List<BuildingEntity> base) {
         BuildingEntity dailyIncome;
         Looting income = new Looting();
         int dailyForgepoints = 0;
@@ -33,13 +32,15 @@ public class EvaluationOfIncome {
         int dailyProduction = 0;
         int dailyCoins = 0;
         int dailyDiamonds = 0;
-        int id;
+        //TODO: Variable wird nicht benutzt.
+        int id = 0;
 
         for (BuildingDto dto : input) {
-            int count = dto.getCount(); //Anzahl des jeweiligen Gebäudes
+            //TODO: Bitte denglisch vermeiden
+            int anzahl = dto.getCount(); //Anzahl des jeweiligen Gebäudes
             int gBonus = dto.getBonus(); //Anzahl des jeweiligen Gebäudes mit Bonus
             id = dto.getId();
-            for (int current = 0; current < count; current++) {
+            for (int current = 0; current < anzahl; current++) {
                 final boolean isBonusIteration = current < gBonus;
                 dailyIncome = income.calculateLoot(base, id, isBonusIteration);
                 dailyGoods = dailyGoods + dailyIncome.getGoods();
@@ -51,15 +52,14 @@ public class EvaluationOfIncome {
                 dailyDiamonds = dailyDiamonds + dailyIncome.getDiamonds();
             }
         }
-
-        CalculationDto result = new CalculationDto();
-        result.setForgePoints(dailyForgepoints);
-        result.setCoins(dailyCoins);
-        result.setDiamonds(dailyDiamonds);
-        result.setGoods(dailyGoods);
-        result.setProduction(dailyProduction);
-        result.setMedals(dailyMedals);
-        result.setUnits(dailyUnits);
-        return result;
+        CalculationDto ergebnis = new CalculationDto();
+        ergebnis.setForgePoints(dailyForgepoints);
+        ergebnis.setCoins(dailyCoins);
+        ergebnis.setDiamonds(dailyDiamonds);
+        ergebnis.setGoods(dailyGoods);
+        ergebnis.setProduction(dailyProduction);
+        ergebnis.setMedals(dailyMedals);
+        ergebnis.setUnits(dailyUnits);
+        return ergebnis;
     }
 }

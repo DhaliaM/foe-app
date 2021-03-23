@@ -1,18 +1,16 @@
-package coffee.homebrew.forge.of.empires.app.service;
+package drunk.homebrew.forge.of.empires.app.service;
 
 import java.util.Random;
 
 /**
- * Diese Klasse überprüft nur ob eine Wahrscheinlichkeit eingetreten ist.
+ * Diese Klasse überprüft nur ob eine Wahrscheinlichkeit eingetreten ist
  *
  * @author Dhalia
  */
 
 class GalaxyChance {
     /**
-     * Die Methode ermittelt eine Zufallszahl zwischen 0 und 100 und prüft ob diese Zahl kleiner oder größer als die
-     * Chance ist.
-     *
+     * TODO: allgemeine Methodenbeschreibung fehlt
      * @param chance - Chance in Double, als Bsp. übergeben von 0.3 entspricht 30%.
      * @return true or false
      */
