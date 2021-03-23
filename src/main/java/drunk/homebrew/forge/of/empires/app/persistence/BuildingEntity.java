@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+//TODO: javadoc fehlt
 @Entity
 @Table(name = "Spezialgebäude")
 public class BuildingEntity {
@@ -13,6 +14,7 @@ public class BuildingEntity {
 
     }
 
+    //TODO: Konstruktor wird nicht benötigt (sollte dir auch IDEA anzeigen)
     public BuildingEntity(String name, int forgePoints, int goods, int production, int units, int coins, int medals, int diamonds) {
         this.name = name;
         this.forgePoints = forgePoints;
@@ -27,6 +29,8 @@ public class BuildingEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "Id")
+    //TODO: In einer produktiven Applikation wird meist Long verwendet.
+    //TODO: Man sollte hier immer mit Wrapper-klassen arbeiten, weil es unter umständen sonst zu Problemen führen kann, wenn immer ein Standardwert gesetzt ist.
     private int id;
 
     @Column(name = "Name")
@@ -60,6 +64,8 @@ public class BuildingEntity {
     public void setDeletedIds(List<Integer> deletedIds) {
         this.deletedIds = deletedIds;
     }
+
+    //TODO: Hat eigentlich nix in der Entität zu suchen.
     @Transient
     List<Integer> deletedIds = new ArrayList<>();
 

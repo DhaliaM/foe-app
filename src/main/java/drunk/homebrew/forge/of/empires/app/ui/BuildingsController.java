@@ -30,11 +30,13 @@ public class BuildingsController {
 
     @RequestMapping(value = "/building", method = RequestMethod.GET)
     public String building(Model model) {
+        //TODO: unnötigen code entfernen
 //        UserEntity user = new UserEntity();
 //        user.setUserName("admin");
 //        user.setPassword(BCrypt.hashpw("roflcopter", BCrypt.gensalt()));
 //        userService.save(user);
 
+        //TODO: Deklaration und Initialisierung bitte in einer Zeile
         List<BuildingEntity> eventBuildings;
         eventBuildings = buildingService.findAll();
         model.addAttribute("eventBuildings", eventBuildings);
@@ -44,6 +46,7 @@ public class BuildingsController {
     @RequestMapping(value = "/updateBuildings", method = RequestMethod.GET)
     public String updateBuilding(Model model) {
 
+        //TODO: Deklaration und Initialisierung bitte in einer Zeile
         List<BuildingEntity> eventBuildings;
         BuildingEntity addBuilding = new BuildingEntity();
         BuildingEntity editBuilding = new BuildingEntity();
@@ -55,6 +58,7 @@ public class BuildingsController {
         return "updateBuildings";
     }
 
+    //TODO: Wird gar nicht benutzt, da im Modal POST verwendet wird und würde auch nicht funktionieren.
     @RequestMapping(value = "/updateBuildings", method = RequestMethod.PUT)
     public String editBuilding(Model model) {
         BuildingEntity editBuilding = new BuildingEntity();
@@ -67,7 +71,9 @@ public class BuildingsController {
     @RequestMapping(value = "/updateBuildings", method = RequestMethod.POST)
     public String addBuilding(@ModelAttribute BuildingEntity addBuilding, Model model) {
 
+        //TODO: Unnötig, ist bereits im model drin, bzw. wird ja von dort geholt
         model.addAttribute("addBuilding", addBuilding);
+        //TODO: Strings werden mit equals verglichen
         if (addBuilding.getName() != "") {
             buildingService.save(addBuilding);
         }

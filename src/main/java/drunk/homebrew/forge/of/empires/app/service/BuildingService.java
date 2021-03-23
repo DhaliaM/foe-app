@@ -21,15 +21,19 @@ public class BuildingService {
         this.buildingJpaRepository = buildingJpaRepository;
     }
 
+    //TODO: Gefährlich einfach ein cast durchzuführen ohne zu prüfen, ob es wirklich eine Liste ist
+    //TODO: javadoc fehlt
     public List<BuildingEntity> findAll(){
         return (List<BuildingEntity>) buildingJpaRepository.findAll();
     }
 
+    //TODO: javadoc fehlt
     public void delete(BuildingEntity buildingEntity)
     {
         buildingJpaRepository.delete(buildingEntity);
     }
 
+    //TODO: javadoc fehlt
     public void save(BuildingEntity buildingEntity)
     {
         if (buildingEntity == null)

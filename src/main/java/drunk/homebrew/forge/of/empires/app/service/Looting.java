@@ -13,15 +13,18 @@ import drunk.homebrew.forge.of.empires.app.persistence.BuildingEntity;
  */
 class Looting {
 
+    // TODO: An Standard Java-Namenkonvention für Konstanten halten
     private static final GalaxyChance bonus = new GalaxyChance();
 
     /**
+     * TODO: allgemeine Methodenbeschreibung fehlt
      * @param buildings   - Liste vom Typ Buildings, welche Gebäude enthält
      * @param id          - die id, Typ Integer für das entsprechende Gebäude
      * @param galaxyBonus - Boolean, ob das Gebäude einen Galaxiebonus erhält oder nicht
      * @return Ergebnis vom Typ Buildings
      */
     BuildingEntity calculateLoot(List<BuildingEntity> buildings, int id, boolean galaxyBonus) {
+        //TODO: Variablen sollten erst dort definiert/initialisitert werden, wo sie auch gebraucht werden
         BuildingEntity result = new BuildingEntity();
         int forgePoints = 0;
         int goods = 0;
@@ -40,9 +43,11 @@ class Looting {
         }
         //wenn das Gebäude ein Großer Leuchtturm ist, wird ein extra Loot Pool für dieses Gebäude benötigt
         for (BuildingEntity building : buildings) {
+            // TODO: Kommentar passt nicht zur eigentlichen Prüfung Großer vs "Grosser
             if ("Grosser Leuchtturm".equals(building.getName())) {
                 Random random = new Random();
                 int randomNumber = random.nextInt(101);
+                //TODO: Jedesmal ein "ExtraLoot"-Objekt zu erzeugen ist unnötig, da es keine Zustände hält (keine Instanzvariablen besitzt)
                 new ExtraLoot().enrichWithRandomLighthouseLoot(building, randomNumber); //übergibt Leuchtturmobjekt
             }
             if (building.getId() == id) {

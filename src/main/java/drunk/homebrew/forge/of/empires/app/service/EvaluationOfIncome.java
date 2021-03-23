@@ -17,11 +17,12 @@ import java.util.*;
 public class EvaluationOfIncome {
 
     /**
+     * TODO: allgemeine Methodenbeschreibung fehlt
      * @param input Liste vom Typ BuildingDto welches die gewählten Gebäude enthält und
      * @param base  eine Liste vom Typ Buildings, welche die Basiswerte aller Gebäude enthält.
      * @return Objekt vom Typ CalculationDto
      */
-    public CalculationDto calculate(List<BuildingDto> input, List<BuildingEntity> base) {
+        public CalculationDto calculate(List<BuildingDto> input, List<BuildingEntity> base) {
         BuildingEntity dailyIncome;
         Looting income = new Looting();
         int dailyForgepoints = 0;
@@ -31,9 +32,11 @@ public class EvaluationOfIncome {
         int dailyProduction = 0;
         int dailyCoins = 0;
         int dailyDiamonds = 0;
+        //TODO: Variable wird nicht benutzt.
         int id = 0;
 
         for (BuildingDto dto : input) {
+            //TODO: Bitte denglisch vermeiden
             int anzahl = dto.getCount(); //Anzahl des jeweiligen Gebäudes
             int gBonus = dto.getBonus(); //Anzahl des jeweiligen Gebäudes mit Bonus
             id = dto.getId();

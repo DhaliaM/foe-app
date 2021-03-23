@@ -17,13 +17,16 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
   <dependencies>
+
 	  <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+	  <!-- TODO: Die Abhängigkeit ist überflüssig, da dieser nicht verwendet wird, der ist nur für die MySQL-Datenbank, du verwendest aber MariaDB. Erkennbar an 'spring.datasource.url' diese beginnt mit 'jdbc:mariadb'. Für den mysql-Connector müsste sie mit 'jdbc:mysql' anfangen -->
 	  <dependency>
 		  <groupId>mysql</groupId>
 		  <artifactId>mysql-connector-java</artifactId>
 		  <version>8.0.23</version>
 	  </dependency>
 	  <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
+	  <!-- TODO: Wahrscheinlich überflüssig, das kommt eigentlich von dem spring-boot-starter-data-jpa, wenn update notwendig lieber erstmal schauen, ob spring-boot-starter-parent eine neue Version besitzt. Zu sehen, wenn du auf 'spring-boot-starter-parent' mit Strg+linke Maustaste draufklickst, ist es unter <dependencies> aufgeführt. Ist dir der Unterschied zwischen <dependencies> und <dependencyManagement> bekannt? Ansonsten können wir da auch gern nochmal drüber sprechen. -->
 	  <dependency>
 		  <groupId>org.hibernate</groupId>
 		  <artifactId>hibernate-core</artifactId>
@@ -35,7 +38,6 @@
 		  <groupId>org.springframework.boot</groupId>
 		  <artifactId>spring-boot-starter-security</artifactId>
 	  </dependency>
-
 
 	  <dependency>
 		  <groupId>org.springframework.boot</groupId>

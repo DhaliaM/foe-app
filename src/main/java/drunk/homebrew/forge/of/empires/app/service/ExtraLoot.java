@@ -10,8 +10,10 @@ import drunk.homebrew.forge.of.empires.app.persistence.BuildingEntity;
 
 class ExtraLoot {
     /**
+     * TODO: allgemeine Methodenbeschreibung fehlt
      * @param poolObject   - das betroffene Gebäude
      * @param randomNumber - Zufallszahl
+     * TODO: Es gibt kein Return
      * @return Ergebnis vom Typ Buildings
      */
     public void enrichWithRandomLighthouseLoot(BuildingEntity poolObject, int randomNumber) {

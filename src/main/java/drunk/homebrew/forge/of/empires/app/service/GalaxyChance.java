@@ -10,6 +10,7 @@ import java.util.Random;
 
 class GalaxyChance {
     /**
+     * TODO: allgemeine Methodenbeschreibung fehlt
      * @param chance - Chance in Double, als Bsp. übergeben von 0.3 entspricht 30%.
      * @return true or false
      */

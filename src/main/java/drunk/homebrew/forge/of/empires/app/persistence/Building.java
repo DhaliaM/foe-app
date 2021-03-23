@@ -4,7 +4,6 @@ package drunk.homebrew.forge.of.empires.app.persistence;
  * Enthält die Attribute des Buildings-Objekts.
  * @author Dhalia
  */
-
 public class Building {
     private String name;
     private int forgePoints;
