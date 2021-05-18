@@ -1,6 +1,6 @@
-package drunk.homebrew.forge.of.empires.app.service;
+package coffee.homebrew.forge.of.empires.app.service;
 
-import drunk.homebrew.forge.of.empires.app.persistence.BuildingEntity;
+import coffee.homebrew.forge.of.empires.app.persistence.BuildingEntity;
 
 /**
  * Diese Klasse enthält einen extra Loot Pool eines Gebäudes.
@@ -10,11 +10,10 @@ import drunk.homebrew.forge.of.empires.app.persistence.BuildingEntity;
 
 class ExtraLoot {
     /**
-     * TODO: allgemeine Methodenbeschreibung fehlt
+     * Setzt den Bonus-Loot des "Grosser Leuchtturm" Objekts basierend auf einer Zufallszahl.
+     *
      * @param poolObject   - das betroffene Gebäude
      * @param randomNumber - Zufallszahl
-     * TODO: Es gibt kein Return
-     * @return Ergebnis vom Typ Buildings
      */
     public void enrichWithRandomLighthouseLoot(BuildingEntity poolObject, int randomNumber) {
 

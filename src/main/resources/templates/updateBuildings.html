@@ -111,7 +111,7 @@
     </tbody>
 </table>
 
-<form action="#" th:action="@{/updateBuildings}" th:object="${addBuilding}" method="post">
+<form action="#" th:action="@{/updateBuildings/add}" th:object="${addBuilding}" method="post">
     <p><label>Gebäude hinzufügen oder löschen</label></p>
     <p><label>building name</label> <input type="text" th:field="*{name}">
         <label>forgepoints </label> <input type="number" th:field="*{forgePoints}" value="0" size="1">

@@ -1,10 +1,10 @@
-package drunk.homebrew.forge.of.empires.app.service;
+package coffee.homebrew.forge.of.empires.app.service;
 
 import java.util.List;
 import java.util.Random;
 
 
-import drunk.homebrew.forge.of.empires.app.persistence.BuildingEntity;
+import coffee.homebrew.forge.of.empires.app.persistence.BuildingEntity;
 
 /**
  * Diese Klasse simuliert das einsammeln von einer Gebäudeproduktion, ggf. mit einem Bonus der Blauen Galaxie.
@@ -13,19 +13,29 @@ import drunk.homebrew.forge.of.empires.app.persistence.BuildingEntity;
  */
 class Looting {
 
-    // TODO: An Standard Java-Namenkonvention für Konstanten halten
-    private static final GalaxyChance bonus = new GalaxyChance();
+    private static final GalaxyChance BONUS = new GalaxyChance();
 
     /**
-     * TODO: allgemeine Methodenbeschreibung fehlt
+     * Berechnet den Ertrag der übergebenen Gebäudes.
+     *
      * @param buildings   - Liste vom Typ Buildings, welche Gebäude enthält
-     * @param id          - die id, Typ Integer für das entsprechende Gebäude
+     * @param id          - die id für das entsprechende Gebäude
      * @param galaxyBonus - Boolean, ob das Gebäude einen Galaxiebonus erhält oder nicht
      * @return Ergebnis vom Typ Buildings
      */
     BuildingEntity calculateLoot(List<BuildingEntity> buildings, int id, boolean galaxyBonus) {
-        //TODO: Variablen sollten erst dort definiert/initialisitert werden, wo sie auch gebraucht werden
+
         BuildingEntity result = new BuildingEntity();
+
+        int factor = 1;
+
+        if (galaxyBonus) {
+            //Galaxiechance 0.3 entspricht 30%
+            if (BONUS.hasGalaxyChance(0.3)) {
+                factor = 2;
+            }
+        }
+
         int forgePoints = 0;
         int goods = 0;
         int units = 0;
@@ -33,22 +43,14 @@ class Looting {
         int diamonds = 0;
         int production = 0;
         int coins = 0;
-        int factor = 1;
+        ExtraLoot extraLoot = null;
 
-        if (galaxyBonus) {
-            //Galaxiechance 0.3 entspricht 30%
-            if (bonus.hasGalaxyChance(0.3)) {
-                factor = 2;
-            }
-        }
-        //wenn das Gebäude ein Großer Leuchtturm ist, wird ein extra Loot Pool für dieses Gebäude benötigt
+        //wenn das Gebäude ein "Grosser Leuchtturm" ist, wird ein extra Loot Pool für dieses Gebäude benötigt
         for (BuildingEntity building : buildings) {
-            // TODO: Kommentar passt nicht zur eigentlichen Prüfung Großer vs "Grosser
             if ("Grosser Leuchtturm".equals(building.getName())) {
                 Random random = new Random();
                 int randomNumber = random.nextInt(101);
-                //TODO: Jedesmal ein "ExtraLoot"-Objekt zu erzeugen ist unnötig, da es keine Zustände hält (keine Instanzvariablen besitzt)
-                new ExtraLoot().enrichWithRandomLighthouseLoot(building, randomNumber); //übergibt Leuchtturmobjekt
+                extraLoot.enrichWithRandomLighthouseLoot(building, randomNumber); //übergibt Leuchtturmobjekt
             }
             if (building.getId() == id) {
                 coins = building.getCoins() * factor;

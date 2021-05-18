@@ -3,7 +3,7 @@ package coffee.homebrew.forge.of.empires.app.ui;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * enthält die Attribute des CalculationDto-Objekts
+ * Enthält die Attribute des CalculationDto-Objekts
  *
  * @author Dhalia
  */

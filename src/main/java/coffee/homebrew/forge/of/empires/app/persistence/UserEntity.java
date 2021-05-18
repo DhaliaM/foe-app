@@ -1,8 +1,10 @@
-package drunk.homebrew.forge.of.empires.app.persistence;
+package coffee.homebrew.forge.of.empires.app.persistence;
 
 import javax.persistence.*;
 
-//TODO: javadoc fehlt
+/**
+ * Entität eines Objekts für die "users" Tabelle.
+ */
 @Entity
 @Table(name = "users")
 public class UserEntity {
@@ -17,12 +19,6 @@ public class UserEntity {
 
     @Column(name = "password", nullable = false)
     private String password;
-
-    //TODO: Konstruktor wird nicht benötigt (sollte dir auch IDEA anzeigen)
-    public UserEntity(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
-    }
 
     public UserEntity() {
     }
