@@ -44,6 +44,7 @@
         for (let element of dataForm.elements) {
             let shortId = element.id;
             shortId = shortId.split(".", 1);
+            // TODO: In JS wird mit '!==' verglichen
             if (shortId != "Galaxiebonus" && shortId != "submitButton") {
                 dataInArray.push(new Building(element.id, element.value, document.getElementById("Galaxiebonus." + element.id).value));
             }
@@ -52,6 +53,7 @@
         var dataJson = JSON.stringify(dataInArray);
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
+            // TODO: In JS wird mit '===' verglichen
             if (this.readyState == 4 && this.status == 200) {
                 console.log(this.responseText);
                 document.getElementById("output").innerHTML = this.responseText;

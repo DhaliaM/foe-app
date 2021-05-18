@@ -195,6 +195,7 @@
         var dataJson = JSON.stringify(idsToDelete);
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
+            // TODO: In JS wird mit '===' verglichen
             if (this.readyState == 4 && this.status == 200) {
                 console.log(this.responseText);
                 window.location.reload(true);
@@ -251,6 +252,7 @@
 
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
+        // TODO: In JS wird mit '===' verglichen
         if (event.target == modal) {
             modal.style.display = "none";
         }
